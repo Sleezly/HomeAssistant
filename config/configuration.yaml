@@ -1,0 +1,227 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: 47.6801
+  longitude: -122.1206
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 32
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/Los_Angeles
+  # List of folders that can be used as sources for sending files
+  whitelist_external_dirs:
+  - /tmp
+  # Customization file
+  customize: !include customize.yaml
+
+# Show links to resources in log and frontend
+#introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+http:
+  api_password: !secret http_password
+
+  #base_url: www.leslietrowbridge.com:8123
+
+  #server_port: 8123
+
+  #server_port: 443
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  # base_url: example.duckdns.org:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+#map:
+
+# Track the sun
+sun:
+
+# Text to speech
+tts:
+  - platform: google
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+
+panel_iframe:
+  configurator:
+    title: Configurator
+    icon: mdi:pencil-box
+    url: http://hassio.local:3218
+  pihole:
+    title: Pi-Hole
+    icon: mdi:pi-box
+    url: http://hassio.local/admin/index.php
+  
+nest:
+  client_id: 1306e457-cc9a-4cd2-9dd8-757fd3c4c8d2
+  client_secret: oE9OVAZGfuYUcYLEhh94fEDsi
+
+#cloud:
+
+#alexa:
+#  smart_home:
+#    filter:
+#      include_entities:
+#        - scene.dinner
+#        - scene.tv
+      # entity_config:
+      #   light.family_room
+      #     name: Yi Home Family Room
+      #     description: Camera
+
+#ios:
+
+hue:
+  bridges:
+    - host: 192.168.1.9
+      filename: phue-0017882bca40.conf
+      allow_unreachable: false
+      allow_hue_groups: false
+      allow_in_emulated_hue: false
+    - host: 192.168.1.15
+      filename: phue-0017886e5a54.conf
+      allow_unreachable: false
+      allow_hue_groups: false
+      allow_in_emulated_hue: false
+
+#camera:
+#  - platform: yi
+#    name: Family Room
+#    host: '192.168.1.2'
+#    password: !secret yi_home_secret
+
+notify:
+  - name: My PushBullet
+    platform: pushbullet
+    api_key: !secret pubhbullet_access_token
+    
+  - platform: webostv
+    host: 192.168.1.6
+    name: tv
+    filename: webostv.conf
+    icon: mdi:run
+
+switch:
+  - platform: tplink
+    host: 192.168.1.132
+    name: Yi Home Camera Smart Plug
+    enable_leds: true
+
+  - platform: rest
+    resource: !secret flux_controller
+    name: Flux
+    method: post
+    body_on: '{"On": "true"}'
+    body_off: '{"On": "false"}'
+    is_on_template: '{{value_json.On}}'
+
+weblink:
+  entities: 
+    - name: Router
+      url: http://192.168.1.1
+      icon: mdi:router-wireless
+    - name: Diskstation
+      url: http://192.168.1.100
+      icon: mdi:server-network
+
+media_player:
+  - platform: webostv
+    host: 192.168.1.6
+    name: TV
+    filename: webostv.conf
+
+sensor:
+  - platform: pi_hole
+    monitored_conditions:
+    
+  - platform: rest
+    resource: !secret hue_sensor_presence_anybody
+    value_template: '{{ value_json.state.presence }}'
+    scan_interval: 60
+    name: 'Anyone Home'
+
+  - platform: rest
+    resource: !secret hue_sensor_presence_victoria
+    value_template: '{{ value_json.state.presence }}'
+    scan_interval: 120
+    name: 'Wife Home'
+
+  - platform: rest
+    resource: !secret hue_sensor_presence_leslie
+    value_template: '{{ value_json.state.presence }}'
+    scan_interval: 120
+    name: 'Me Home'
+
+  - platform: rest
+    resource: !secret hue_sensor_motion_upstairs
+    value_template: '{{ value_json.state.status }}'
+    scan_interval: 5
+    name: 'Hallway Motion'
+
+  - platform: rest
+    resource: !secret hue_sensor_motion_garage
+    value_template: '{{ value_json.state.status }}'
+    scan_interval: 120
+    name: 'Garage Motion'
+
+  - platform: rest
+    resource: !secret hue_sensor_motion_patio
+    value_template: '{{ value_json.state.status }}'
+    scan_interval: 120
+    name: 'Patio Motion'
+
+  - platform: rest
+    resource: !secret hue_sensor_temperature
+    value_template: '{{ (((value_json.state.temperature | float / 100 * 1.8 + 32) * 100) | int / 100) }}'
+    scan_interval: 120
+    unit_of_measurement: '°F'
+    name: 'Hallway Temp'
+
+  - platform: rest
+    resource: !secret hue_sensor_temperature_outside
+    value_template: '{{ (((value_json.state.temperature | float / 100 * 1.8 + 32) * 100) | int / 100) }}'
+    scan_interval: 120
+    unit_of_measurement: '°F'
+    name: 'Outside Temp'
+
+  - platform: rest
+    resource: !secret flux_controller
+    value_template: '{{ value_json.FluxStatus.FluxColorTemperature }}'
+    scan_interval: 60
+    unit_of_measurement: '°K'
+    name: 'Flux'
+
+  - platform: rest
+    resource: !secret flux_controller
+    value_template: '{{ value_json.On }}'
+    scan_interval: 60
+    name: 'Flux On'

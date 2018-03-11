@@ -1,0 +1,14 @@
+#tv_time:
+#  alias: 'office light script'
+#  sequence:
+#    service: light.toggle
+#    data:
+#        entity_id: light.office_1
+        
+#home_leave:
+#  alias: 'Leave Home Script'
+#  sequence:
+#    service: hue.hue_activate_scene
+#    data:
+#      group_name: Downstairs
+#      scene_name: Relax

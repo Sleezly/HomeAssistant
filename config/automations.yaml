@@ -1,0 +1,129 @@
+# Actions for Home Arrival
+- id: auto1
+  alias: Actions When Arriving Home
+  initial_state: true
+  hide_entity: false
+  trigger:
+  - entity_id: sensor.anyone_home
+    from: 'False'
+    platform: state
+    to: 'True'
+  action:
+    - service: switch.turn_off
+      entity_id: switch.yi_home_camera_smart_plug
+    - service: switch.turn_on
+      entity_id: switch.flux
+
+# Actions for home exit
+- id: auto2
+  alias: Actions When Leaving Home
+  initial_state: true
+  hide_entity: false
+  trigger:
+  - entity_id: sensor.anyone_home
+    from: 'True'
+    platform: state
+    to: 'False'
+  action:
+    - service: switch.turn_on
+      entity_id: switch.yi_home_camera_smart_plug
+    - service: switch.turn_off
+      entity_id: switch.flux
+
+# Hallway sensor intruder alert
+- id: auto3
+  alias: Intruder Alert Hallway
+  initial_state: true
+  hide_entity: false
+  trigger:
+  - entity_id: sensor.hallway_motion
+    from: '0'
+    platform: state
+    to: '1'
+  - entity_id: sensor.hallway_motion
+    from: '0'
+    platform: state
+    to: '2'
+  condition: 
+    condition: state
+    entity_id: sensor.anyone_home
+    state: 'False'
+  action:
+    service: notify.my_pushbullet
+    data_template:
+      title: "Intruder Alert: Hallway"
+      message: "Detected motion in the upstairs hallway."
+
+# Garage sensor intruder alert
+- id: auto4
+  alias: Intruder Alert Garage
+  initial_state: true
+  hide_entity: false
+  trigger:
+  - entity_id: sensor.garage_motion
+    from: '0'
+    platform: state
+    to: '1'
+  - entity_id: sensor.garage_motion
+    from: '0'
+    platform: state
+    to: '2'
+  condition: 
+    condition: state
+    entity_id: sensor.anyone_home
+    state: 'False'
+  action:
+    service: notify.my_pushbullet
+    data_template:
+      title: "Intruder Alert: Garage"
+      message: "Detected motion in the garage."
+
+# Patio sensor intruder alert
+- id: auto5
+  alias: Intruder Alert Patio
+  initial_state: true
+  hide_entity: false
+  trigger:
+  - entity_id: sensor.patio_motion
+    from: '0'
+    platform: state
+    to: '1'
+  - entity_id: sensor.patio_motion
+    from: '0'
+    platform: state
+    to: '2'
+  condition: 
+    condition: state
+    entity_id: sensor.anyone_home
+    state: 'False'
+  action:
+    service: notify.my_pushbullet
+    data_template:
+      title: "Intruder Alert: Patio"
+      message: "Detected motion on the patio."
+
+# Hallway sensor intruder alert
+- id: auto6
+  alias: Motion Alert Hallway at Night
+  initial_state: true
+  hide_entity: false
+  trigger:
+  - entity_id: sensor.hallway_motion
+    from: '0'
+    platform: state
+    to: '1'
+  - entity_id: sensor.hallway_motion
+    from: '0'
+    platform: state
+    to: '2'
+  condition:
+    condition: or
+    conditions:
+      - condition: time
+        after: '20:00:00'
+      - condition: time
+        before: '07:00:00'
+  action:
+    service: notify.tv
+    data:
+      message: "Motion alert for upstairs hallway!"

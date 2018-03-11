@@ -1,0 +1,159 @@
+group.all_automations:
+  hidden: false
+group.all_scripts:
+  hidden: false
+
+# Nest
+binary_sensor.hallway_thermostat_nest_fan:
+  hidden: true
+binary_sensor.hallway_thermostat_nest_has_leaf:
+  hidden: true
+binary_sensor.hallway_thermostat_nest_is_using_emergency_heat:
+  hidden: true
+binary_sensor.hallway_thermostat_nest_online:
+  hidden: true
+binary_sensor.hallway_thermostat_nest_is_locked:
+  hidden: true
+sensor.hallway_thermostat_nest_operation_mode:
+  hidden: true
+
+# Hue Groups
+light.closet:
+  hidden: true
+light.washroom:
+  hidden: true
+light.backyard:
+  hidden: true
+light.garage:
+  hidden: true
+
+# Outside
+light.backyard_1:
+  hidden: true
+light.backyard_2:
+  hidden: true
+light.inside_garage_1:
+  hidden: true
+light.inside_garage_2:
+  hidden: true
+light.outside_garage_1:
+  hidden: true
+light.outside_garage_2:
+  hidden: true
+light.outside_downlight_1:
+  hidden: true
+light.outside_downlight_2:
+  hidden: true
+
+# Bedroom Anna
+light.bedroom_anna_ceiling_1:
+  hidden: true
+light.bedroom_anna_ceiling_2:
+  hidden: true
+light.bedroom_anna_lamp:
+  hidden: false
+light.bedroom_anna_closet:
+  hidden: true
+
+# Bedroom James
+light.bedroom_james_ceiling_1:
+  hidden: true
+light.bedroom_james_ceiling_2:
+  hidden: true
+light.bedroom_james_lamp:
+  hidden: false
+
+# Bedroom Nathan
+light.bedroom_nathan_ceiling_1:
+  hidden: true
+light.bedroom_nathan_ceiling_2:
+  hidden: true
+light.bedroom_nathan_lamp:
+  hidden: false
+
+# Master Bedroom
+light.bedroom_master_ceiling_1:
+  hidden: true
+light.bedroom_master_ceiling_2:
+  hidden: true
+light.bedroom_master_lamp:
+  hidden: true
+light.bedroom_master_closet:
+  hidden: true
+light.bedroom_master_lightstrip:
+  hidden: true
+light.go:
+  hidden: true
+
+# Downstairs
+light.entry_1:
+  hidden: true
+light.entry_2:
+  hidden: true
+light.entry_3:
+  hidden: true
+light.washroom_1:
+  hidden: true
+light.washroom_2:
+  hidden: true
+light.office_1:
+  hidden: true
+light.office_2:
+  hidden: true
+light.office_3:
+  hidden: true
+light.dining_table:
+  hidden: true
+light.formal_dining_1:
+  hidden: true
+light.formal_dining_2:
+  hidden: true
+light.formal_dining_3:
+  hidden: true
+light.kitchen_ceiling_1:
+  hidden: true
+light.kitchen_ceiling_2:
+  hidden: true
+light.kitchen_ceiling_3:
+  hidden: true
+light.kitchen_ceiling_4:
+  hidden: true
+light.kitchen_sink:
+  hidden: true
+light.kitchen_strip_microwave:
+  hidden: true
+light.kitchen_strip_oven:
+  hidden: true
+light.kitchen_strip_coffee:
+  hidden: true
+light.kitchen_strip_dishwasher:
+  hidden: true
+light.tv:
+  hidden: true
+light.mantle:
+  hidden: true
+light.theater_lamp_1:
+  hidden: true
+light.theater_lamp_2:
+  hidden: true
+light.formal_dining:
+  hidden: true
+light.washroom_downlight_1:
+  hidden: true
+light.washroom_downlight_2:
+  hidden: true
+
+# Laundry
+light.laundry_1:
+  hidden: true
+light.laundry_2:
+  hidden: true
+
+# Hallway
+light.bedroom_hall_1:
+  hidden: true
+light.bedroom_hall_2:
+  hidden: true
+light.bedroom_hall_3:
+  hidden: true
+
