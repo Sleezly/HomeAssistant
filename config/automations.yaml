@@ -127,3 +127,105 @@
     service: notify.tv
     data:
       message: "Motion alert for upstairs hallway!"
+
+ # Bose Presets
+#- id: auto7
+#  alias: Bose Presets
+#  trigger:
+#  - platform: state
+#    entity_id: input_number.theater, input_number.kitchen
+#  action:
+#  - service: media_player.play_media
+#    data_template:
+#      entity_id: >
+#        {% if trigger.entity_id == "input_number.theater" %} media_player.theater
+#        {% else %} media_player.kitchen {% endif %}
+#      media_content_id: '{{ trigger.to_state.state | int }}'
+#      media_content_type: 'music'
+#  - service: media_player.volume_set
+#    data:
+#      entity_id: media_player.theater, media_player.kitchen
+#      volume_level: 0.2
+#  - service: media_player.soundtouch_play_everywhere
+#    data:
+#      master: media_player.kitchen
+ 
+#            {% if is_state("input_text.rfid_uid", "74920810") %} script.toggle_play_everywhere
+
+# RFID Reader Duplicate Trigger Script
+- id: auto9
+  alias: RFID Duplicate Interpreter
+  trigger:
+  - platform: state
+    entity_id: input_text.rfid_uid
+  condition: 
+  - condition: template
+    value_template: >
+      {% if is_state("input_text.rfid_uid", "None") %} false
+      {% elif is_state("input_text.rfid_uid_last", "None") %} false
+      {% elif states("input_text.rfid_uid") == states("input_text.rfid_uid_last") %} true
+      {% else %} false {% endif %}
+  action:
+  - service: input_text.set_value
+    data:
+      entity_id: input_text.rfid_uid
+      value: None      
+  - service: media_player.media_next_track
+    entity_id: media_player.spotify
+
+# RFID Reader Trigger Script
+- id: auto8
+  alias: RFID Interpreter
+  trigger:
+  - platform: state
+    entity_id: input_text.rfid_uid
+  condition: 
+  - condition: template
+    value_template: >
+      {% if is_state("input_text.rfid_uid", "None") %} false
+      {% elif states("input_text.rfid_uid") == states("input_text.rfid_uid_last") %} false
+      {% else %} true {% endif %}
+  action:
+  - service: script.turn_on
+    entity_id: script.spotify_select_source
+  - service: script.turn_on
+    data_template:
+      entity_id: >
+        {% if is_state("input_text.rfid_uid", "74862954") %} script.play_illenium
+        {% elif is_state("input_text.rfid_uid", "80572266") %} script.play_hawaiian_reggae
+        {% elif is_state("input_text.rfid_uid", "68396906") %} script.play_chris_issak
+        {% elif is_state("input_text.rfid_uid", "72695658") %} script.play_seven_lions
+        {% elif is_state("input_text.rfid_uid", "69164394") %} script.play_meghan_trainor
+        {% elif is_state("input_text.rfid_uid", "73226346") %} script.play_deep_focus
+        {% endif %}
+  - service: script.turn_on
+    entity_id: script.spotify_shuffle_set
+  - service: script.turn_on
+    entity_id: script.kitchen_volume_set
+  - service: script.turn_on
+    entity_id: script.kitchen_media_play
+  - service: script.turn_on
+    entity_id: script.play_everywhere
+  - service: input_text.set_value
+    data_template:
+      entity_id: input_text.rfid_uid_last
+      value: "{{ states('input_text.rfid_uid') }}"
+  - service: input_text.set_value
+    data:
+      entity_id: input_text.rfid_uid
+      value: None
+      
+- id: auto10
+  alias: Reset Duplicate ID on Stop Playing
+  trigger:
+  - platform: state
+    entity_id: media_player.kitchen
+  condition: 
+  - condition: state
+    entity_id: media_player.kitchen
+    state: 'off'
+  action:
+  - service: input_text.set_value
+    data:
+      entity_id: input_text.rfid_uid_last
+      value: None

@@ -1,0 +1,107 @@
+#  default_view:
+#    view: yes
+#    icon: mdi:home
+##    entities:
+#      - group.weather_card_today
+#      - group.weather_card_forecast
+#      - group.all_automations
+#      - group.all_scripts
+#      - group.input_text
+#      - group.climate
+#      - group.switch
+#      - group.media_player
+#      - group.weblink
+
+  weather_card_today:
+    name: Today's Forecast
+    view: no
+    entities:
+      - sensor.forecast_today
+      - sensor.dark_sky_temperature
+      - sensor.dark_sky_humidity
+      
+  weather_card_forecast:
+    name: Weekly Forecast
+    view: no
+    entities:
+      - sensor.dark_sky_daily_summary
+      - sensor.forecast_1
+      - sensor.forecast_2
+      - sensor.forecast_3
+      - sensor.forecast_4
+      - sensor.forecast_5
+      - sensor.forecast_6
+      - sensor.forecast_7
+
+  presence_card:
+    name: Presence
+    view: no
+    entities:
+      - sensor.wife_home
+      - sensor.me_home
+      
+  downstairs_card:
+    name: Downstairs
+    view: yes
+    entities:
+      - group.lights_downstairs_theater
+      - group.lights_downstairs_dining
+      - group.lights_downstairs_formal
+      - group.lights_kitchen_lightstrips
+      - group.lights_kitchen
+      - group.lights_downstairs_entry
+      
+  lights_downstairs_theater:
+    name: Theater Lights
+    view: no
+    entities:
+      - light.theater_lamp_1
+      - light.theater_lamp_2
+      - light.tv
+      - light.mantle
+      - light.washroom_downlight_1
+      - light.washroom_downlight_2
+      
+  lights_downstairs_dining:
+    name: Dining Lights
+    view: no
+    entities:
+      - light.dining_table
+      
+  lights_downstairs_formal:
+    name: Formal Lights
+    view: no
+    entities:
+      - light.office_1
+      - light.office_2
+      - light.office_3
+      - light.formal_dining_1
+      - light.formal_dining_2
+      - light.formal_dining_3
+
+  lights_kitchen_lightstrips:
+    name: Kitchen Lightstrips
+    view: no
+    entities:
+      - light.kitchen_strip_microwave
+      - light.kitchen_strip_oven
+      - light.kitchen_strip_coffee
+      - light.kitchen_strip_dishwasher
+      
+  lights_kitchen:
+    name: Kitchen Ceiling Lights
+    view: no
+    entities:
+      - light.kitchen_sink
+      - light.kitchen_ceiling_1
+      - light.kitchen_ceiling_2
+      - light.kitchen_ceiling_3
+      - light.kitchen_ceiling_4
+
+  lights_downstairs_entry:
+    name: Entry Lights
+    view: no
+    entities:
+      - light.entry_1
+      - light.entry_2
+      - light.entry_3

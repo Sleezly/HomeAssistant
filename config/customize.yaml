@@ -2,7 +2,110 @@ group.all_automations:
   hidden: false
 group.all_scripts:
   hidden: false
-
+  
+# Presence Profile Photos
+sensor.wife_home:
+  entity_picture: /local/victoria.jpg
+  friendly_name: Victoria
+sensor.me_home:
+  entity_picture: /local/profile.jpg
+  friendly_name: Sleezly
+        
+# Dark Sky
+sensor.season:
+  hidden: true
+sensor.weekday:
+  hidden: true
+sensor.dark_sky_daily_summary:
+  friendly_name: Daily Summary
+  hidden: false
+sensor.dark_sky_summary:
+  hidden: true
+sensor.dark_sky_temperature:
+  friendly_name: Temperature
+  hidden: false
+sensor.dark_sky_daily_high_temperature:
+  hidden: true
+sensor.dark_sky_daily_high_temperature_1:
+  hidden: true
+sensor.dark_sky_daily_high_temperature_2:
+  hidden: true
+sensor.dark_sky_daily_high_temperature_3:
+  hidden: true
+sensor.dark_sky_daily_high_temperature_4:
+  hidden: true
+sensor.dark_sky_daily_high_temperature_5:
+  hidden: true
+sensor.dark_sky_daily_high_temperature_6:
+  hidden: true
+sensor.dark_sky_daily_high_temperature_7:
+  hidden: true
+sensor.dark_sky_daily_low_temperature:
+  hidden: true
+sensor.dark_sky_daily_low_temperature_1:
+  hidden: true
+sensor.dark_sky_daily_low_temperature_2:
+  hidden: true
+sensor.dark_sky_daily_low_temperature_3:
+  hidden: true
+sensor.dark_sky_daily_low_temperature_4:
+  hidden: true
+sensor.dark_sky_daily_low_temperature_5:
+  hidden: true
+sensor.dark_sky_daily_low_temperature_6:
+  hidden: true
+sensor.dark_sky_daily_low_temperature_7:
+  hidden: true
+sensor.dark_sky_humidity:
+  friendly_name: Humidity
+  hidden: false
+sensor.dark_sky_humidity_1:
+  hidden: true
+sensor.dark_sky_humidity_2:
+  hidden: true
+sensor.dark_sky_humidity_3:
+  hidden: true
+sensor.dark_sky_humidity_4:
+  hidden: true
+sensor.dark_sky_humidity_5:
+  hidden: true
+sensor.dark_sky_humidity_6:
+  hidden: true
+sensor.dark_sky_humidity_7:
+  hidden: true
+sensor.dark_sky_icon:
+  hidden: true
+sensor.dark_sky_icon_1:
+  hidden: true
+sensor.dark_sky_icon_2:
+  hidden: true
+sensor.dark_sky_icon_3:
+  hidden: true
+sensor.dark_sky_icon_4:
+  hidden: true
+sensor.dark_sky_icon_5:
+  hidden: true
+sensor.dark_sky_icon_6:
+  hidden: true
+sensor.dark_sky_icon_7:
+  hidden: true
+sensor.dark_sky_precip_probability:
+  hidden: true
+sensor.dark_sky_precip_probability_1:
+  hidden: true
+sensor.dark_sky_precip_probability_2:
+  hidden: true
+sensor.dark_sky_precip_probability_3:
+  hidden: true
+sensor.dark_sky_precip_probability_4:
+  hidden: true
+sensor.dark_sky_precip_probability_5:
+  hidden: true
+sensor.dark_sky_precip_probability_6:
+  hidden: true
+sensor.dark_sky_precip_probability_7:
+  hidden: true
+  
 # Nest
 binary_sensor.hallway_thermostat_nest_fan:
   hidden: true
@@ -16,7 +119,29 @@ binary_sensor.hallway_thermostat_nest_is_locked:
   hidden: true
 sensor.hallway_thermostat_nest_operation_mode:
   hidden: true
+sensor.hallway_thermostat_nest_humidity:
+  hidden: true
+sensor.hallway_thermostat_nest_temperature:
+  hidden: true
+sensor.hallway_thermostat_nest_target:
+  friendly_name: Nest Target
+sensor.hallway_thermostat_nest_hvac_state:
+  friendly_name: Nest State
 
+# Light Groups
+group.lights_downstairs_theater:
+  hidden: true
+group.lights_downstairs_dining:
+  hidden: true
+group.lights_downstairs_formal:
+  hidden: true
+group.lights_kitchen_lightstrips:
+  hidden: true
+group.lights_kitchen:
+  hidden: true
+group.lights_downstairs_entry:
+  hidden: true
+  
 # Hue Groups
 light.closet:
   hidden: true
@@ -27,6 +152,58 @@ light.backyard:
 light.garage:
   hidden: true
 
+# Downstairs
+light.office_1:
+  hidden: false
+light.office_2:
+  hidden: true
+light.office_3:
+  hidden: true
+light.formal_dining_1:
+  hidden: false
+light.formal_dining_2:
+  hidden: true
+light.formal_dining_3:
+  hidden: true
+light.kitchen_strip_microwave:
+  hidden: false
+light.kitchen_strip_oven:
+  hidden: true
+light.kitchen_strip_coffee:
+  hidden: true
+light.kitchen_strip_dishwasher:
+  hidden: true
+light.kitchen_sink:
+  hidden: true
+light.kitchen_ceiling_1:
+  hidden: true
+light.kitchen_ceiling_2:
+  hidden: true
+light.kitchen_ceiling_3:
+  hidden: true
+light.kitchen_ceiling_4:
+  hidden: true
+light.entry_1:
+  hidden: true
+light.entry_2:
+  hidden: true
+light.entry_3:
+  hidden: true
+light.dining_table:
+  hidden: true
+light.theater_lamp_1:
+  hidden: true
+light.theater_lamp_2:
+  hidden: true
+light.tv:
+  hidden: true
+light.mantle:
+  hidden: true
+light.washroom_downlight_1:
+  hidden: true
+light.washroom_downlight_2:
+  hidden: true
+      
 # Outside
 light.backyard_1:
   hidden: true
@@ -51,7 +228,7 @@ light.bedroom_anna_ceiling_1:
 light.bedroom_anna_ceiling_2:
   hidden: true
 light.bedroom_anna_lamp:
-  hidden: false
+  hidden: true
 light.bedroom_anna_closet:
   hidden: true
 
@@ -61,7 +238,7 @@ light.bedroom_james_ceiling_1:
 light.bedroom_james_ceiling_2:
   hidden: true
 light.bedroom_james_lamp:
-  hidden: false
+  hidden: true
 
 # Bedroom Nathan
 light.bedroom_nathan_ceiling_1:
@@ -69,7 +246,7 @@ light.bedroom_nathan_ceiling_1:
 light.bedroom_nathan_ceiling_2:
   hidden: true
 light.bedroom_nathan_lamp:
-  hidden: false
+  hidden: true
 
 # Master Bedroom
 light.bedroom_master_ceiling_1:
@@ -83,64 +260,6 @@ light.bedroom_master_closet:
 light.bedroom_master_lightstrip:
   hidden: true
 light.go:
-  hidden: true
-
-# Downstairs
-light.entry_1:
-  hidden: true
-light.entry_2:
-  hidden: true
-light.entry_3:
-  hidden: true
-light.washroom_1:
-  hidden: true
-light.washroom_2:
-  hidden: true
-light.office_1:
-  hidden: true
-light.office_2:
-  hidden: true
-light.office_3:
-  hidden: true
-light.dining_table:
-  hidden: true
-light.formal_dining_1:
-  hidden: true
-light.formal_dining_2:
-  hidden: true
-light.formal_dining_3:
-  hidden: true
-light.kitchen_ceiling_1:
-  hidden: true
-light.kitchen_ceiling_2:
-  hidden: true
-light.kitchen_ceiling_3:
-  hidden: true
-light.kitchen_ceiling_4:
-  hidden: true
-light.kitchen_sink:
-  hidden: true
-light.kitchen_strip_microwave:
-  hidden: true
-light.kitchen_strip_oven:
-  hidden: true
-light.kitchen_strip_coffee:
-  hidden: true
-light.kitchen_strip_dishwasher:
-  hidden: true
-light.tv:
-  hidden: true
-light.mantle:
-  hidden: true
-light.theater_lamp_1:
-  hidden: true
-light.theater_lamp_2:
-  hidden: true
-light.formal_dining:
-  hidden: true
-light.washroom_downlight_1:
-  hidden: true
-light.washroom_downlight_2:
   hidden: true
 
 # Laundry

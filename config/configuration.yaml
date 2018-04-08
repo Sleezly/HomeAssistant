@@ -2,8 +2,8 @@ homeassistant:
   # Name of the location where Home Assistant is running
   name: Home
   # Location required to calculate the time the sun rises and sets
-  latitude: 47.6801
-  longitude: -122.1206
+  latitude: !secret secret_latitude
+  longitude: !secret secret_longitude
   # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: 32
   # metric for Metric, imperial for Imperial
@@ -15,7 +15,12 @@ homeassistant:
   - /tmp
   # Customization file
   customize: !include customize.yaml
+  # Packages
+  packages: !include_dir_named packages
 
+# Python script for Weather
+python_script:
+  
 # Show links to resources in log and frontend
 #introduction:
 
@@ -67,9 +72,8 @@ sun:
 tts:
   - platform: google
 
-group: !include groups.yaml
-automation: !include automations.yaml
-script: !include scripts.yaml
+# MQTT
+#mqtt:
 
 panel_iframe:
   configurator:
@@ -106,12 +110,10 @@ hue:
       filename: phue-0017882bca40.conf
       allow_unreachable: false
       allow_hue_groups: false
-      allow_in_emulated_hue: false
     - host: 192.168.1.15
       filename: phue-0017886e5a54.conf
       allow_unreachable: false
       allow_hue_groups: false
-      allow_in_emulated_hue: false
 
 #camera:
 #  - platform: yi
@@ -126,9 +128,8 @@ notify:
     
   - platform: webostv
     host: 192.168.1.6
-    name: tv
+    name: TV
     filename: webostv.conf
-    icon: mdi:run
 
 switch:
   - platform: tplink
@@ -158,70 +159,42 @@ media_player:
     host: 192.168.1.6
     name: TV
     filename: webostv.conf
+  - platform: spotify
+    client_id: !secret spotify_client_id
+    client_secret: !secret spotify_client_secret
 
-sensor:
-  - platform: pi_hole
-    monitored_conditions:
+#    aliases:
+#      a0a685f52516a17eac7fcdbee4a23274af660a21: 'Pheonix'
+#      19b6395384b693858a9d9197af0601b8ffbc8eef: 'Kitchen'
+#      657937158191e93524b89a8af65addcfa2730d95: 'Theater'
+#      eaf643e7ef6b4cfbd0a9d1350bac5553f9067299: 'iPhone'
+
+#input_number:
+#  kitchen:
+#    name: Presets
+#    initial: 1
+#    min: 1
+#    max: 6
+#    step: 1
+#    mode: slider
+#    unit_of_measurement: step
+
+input_text:
+  rfid_uid:
+    name: RFID UID
+    initial: None
+  rfid_uid_last:
+    name: Music UID
+    initial: None
     
-  - platform: rest
-    resource: !secret hue_sensor_presence_anybody
-    value_template: '{{ value_json.state.presence }}'
-    scan_interval: 60
-    name: 'Anyone Home'
+# Sensors
+sensor: !include sensors.yaml
+    
+# Display
+group: !include groups.yaml
 
-  - platform: rest
-    resource: !secret hue_sensor_presence_victoria
-    value_template: '{{ value_json.state.presence }}'
-    scan_interval: 120
-    name: 'Wife Home'
+# Automation
+automation: !include automations.yaml
 
-  - platform: rest
-    resource: !secret hue_sensor_presence_leslie
-    value_template: '{{ value_json.state.presence }}'
-    scan_interval: 120
-    name: 'Me Home'
-
-  - platform: rest
-    resource: !secret hue_sensor_motion_upstairs
-    value_template: '{{ value_json.state.status }}'
-    scan_interval: 5
-    name: 'Hallway Motion'
-
-  - platform: rest
-    resource: !secret hue_sensor_motion_garage
-    value_template: '{{ value_json.state.status }}'
-    scan_interval: 120
-    name: 'Garage Motion'
-
-  - platform: rest
-    resource: !secret hue_sensor_motion_patio
-    value_template: '{{ value_json.state.status }}'
-    scan_interval: 120
-    name: 'Patio Motion'
-
-  - platform: rest
-    resource: !secret hue_sensor_temperature
-    value_template: '{{ (((value_json.state.temperature | float / 100 * 1.8 + 32) * 100) | int / 100) }}'
-    scan_interval: 120
-    unit_of_measurement: '°F'
-    name: 'Hallway Temp'
-
-  - platform: rest
-    resource: !secret hue_sensor_temperature_outside
-    value_template: '{{ (((value_json.state.temperature | float / 100 * 1.8 + 32) * 100) | int / 100) }}'
-    scan_interval: 120
-    unit_of_measurement: '°F'
-    name: 'Outside Temp'
-
-  - platform: rest
-    resource: !secret flux_controller
-    value_template: '{{ value_json.FluxStatus.FluxColorTemperature }}'
-    scan_interval: 60
-    unit_of_measurement: '°K'
-    name: 'Flux'
-
-  - platform: rest
-    resource: !secret flux_controller
-    value_template: '{{ value_json.On }}'
-    scan_interval: 60
-    name: 'Flux On'
+# Scripts
+script: !include scripts.yaml

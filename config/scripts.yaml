@@ -12,3 +12,145 @@
 #    data:
 #      group_name: Downstairs
 #      scene_name: Relax
+
+#play_preset_1:
+#   alias: 'Play Bose Preset 1'
+#   sequence:
+#     service: media_player.play_media
+#     data:
+#       entity_id: media_player.kitchen
+#       media_content_id: '1'
+#       media_content_type: 'music'
+
+play_meghan_trainor:
+  alias: 'Play Meghan Trainor'
+  sequence:
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.spotify
+      media_content_id: 'spotify:artist:6JL8zeS1NmiOftqZTRgdTz'
+      media_content_type: 'playlist'
+
+play_chris_issak:
+  alias: 'Play Chris Issak'
+  sequence:
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.spotify
+      media_content_id: 'spotify:artist:7290H8m1Dwt8G7jm1y9CQx'
+      media_content_type: 'playlist'
+
+play_seven_lions:
+  alias: 'Play Seven Lions'
+  sequence:
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.spotify
+      media_content_id: 'spotify:artist:6fcTRFpz0yH79qSKfof7lp'
+      media_content_type: 'playlist'
+
+play_hawaiian_reggae:
+  alias: 'Play Hawaiian Reggae'
+  sequence:
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.spotify
+      media_content_id: 'spotify:user:1214764388:playlist:588rONRknunC0Slquv8jps'
+      media_content_type: 'playlist'
+      
+play_illenium:
+  alias: 'Play Illenium'
+  sequence:
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.spotify
+      media_content_id: 'spotify:artist:45eNHdiiabvmbp4erw26rg'
+      media_content_type: 'playlist'
+
+play_deep_focus:
+  alias: 'Play Deep Focus'
+  sequence:
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.spotify
+      media_content_id: 'spotify:user:spotify:playlist:37i9dQZF1DWZeKCadgRdKQ'
+      media_content_type: 'playlist'
+
+# Turns on the Kitchen player if it's currently off
+kitchen_turn_on:
+  sequence:
+  - condition: template
+    value_template: >
+      {% if is_state("media_player.kitchen", "off") %} true
+      {% else %} false {% endif %}
+  - service: media_player.turn_on
+    entity_id: media_player.kitchen
+
+# Kitchen Volume
+kitchen_volume_set:
+  sequence:
+  - service: media_player.volume_set
+    data:
+      entity_id: media_player.kitchen
+      volume_level: 0.3
+      
+# Starts kitchen playback
+kitchen_media_play:
+  sequence:
+  - condition: template
+    value_template: >
+      {% if is_state("media_player.kitchen", "playing") %} false
+      {% else %} true {% endif %}
+  - service: media_player.media_play
+    entity_id: media_player.kitchen
+
+# Sets the Spotify shuffle value
+spotify_shuffle_set:
+  sequence:
+  - condition: template
+    value_template: >
+      {% if is_state_attr("media_player.spotify", "shuffle", false) %} true
+      {% else %} false {% endif %}
+  - service: media_player.shuffle_set
+    data:
+      entity_id: media_player.spotify
+      shuffle: true
+      
+# Set the Spotify source
+spotify_select_source:
+  sequence:
+  - condition: template
+    value_template: >
+      {% if is_state_attr("media_player.spotify", "source", "Kitchen") %} false
+      {% elif is_state_attr("media_player.spotify", "source", "Kitchen Group") %} false
+      {% else %} true {% endif %}
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.spotify
+      source: Kitchen
+
+# sdf
+play_everywhere:
+  alias: 'Play Everywhere'
+  sequence:
+  - condition: template
+    value_template: >
+      {% if is_state("media_player.theater", "off") %} true
+      {% elif is_state("media_player.theater", "paused") %} true
+      {% else %} false {% endif %}
+  - service: media_player.soundtouch_play_everywhere
+    data:
+      master: media_player.kitchen
+  - service: media_player.volume_set
+    data:
+      entity_id: media_player.tv
+      volume_level: 0.3
+  
+#  - service: media_player.volume_set
+#    data:
+#      entity_id: media_player.theater, media_player.kitchen
+#      volume_level: 0.2
+#  - service: media_player.select_source
+#    data:
+#      entity_id: media_player.spotify
+#      source: Kitchen
