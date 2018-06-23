@@ -1,0 +1,132 @@
+  - platform: group
+    name: Theater Lights
+    entities:
+      - light.theater_lamp_1
+      - light.theater_lamp_2
+      - light.tv
+      - light.mantle
+
+  - platform: group
+    name: Washroom Downlights
+    entities:
+      - light.washroom_downlight_1
+      - light.washroom_downlight_2
+      
+  - platform: group
+    name: Dining Lights
+    view: no
+    entities:
+      - light.dining_table
+      
+  - platform: group
+    name: Formal Lights
+    entities:
+      - light.office_1
+      - light.office_2
+      - light.office_3
+      - light.formal_dining_1
+      - light.formal_dining_2
+      - light.formal_dining_3
+
+  - platform: group
+    name: Kitchen Lightstrips
+    entities:
+      - light.kitchen_strip_microwave
+      - light.kitchen_strip_oven
+      - light.kitchen_strip_coffee
+      - light.kitchen_strip_dishwasher
+      
+  - platform: group
+    name: Kitchen Ceiling
+    entities:
+      - light.kitchen_sink
+      - light.kitchen_ceiling_1
+      - light.kitchen_ceiling_2
+      - light.kitchen_ceiling_3
+      - light.kitchen_ceiling_4
+
+  - platform: group
+    name: Entry Lights
+    entities:
+      - light.entry_1
+      - light.entry_2
+      - light.entry_3
+
+  - platform: group
+    name: Bedroom Hallway
+    entities:
+      - light.bedroom_hall_1
+      - light.bedroom_hall_2
+      - light.bedroom_hall_3
+
+  - platform: group
+    name: Master Lights
+    view: no
+    entities:
+      - light.bedroom_master_ceiling_1
+      - light.bedroom_master_ceiling_2
+      - light.bedroom_master_closet
+      - light.bedroom_master_lamp
+      - light.bedroom_master_lightstrip
+      - light.go
+      
+  - platform: group
+    name: Bedroom Anna
+    entities:
+      - light.bedroom_anna_ceiling_1
+      - light.bedroom_anna_ceiling_2
+      - light.bedroom_anna_closet
+      - light.bedroom_anna_lamp
+      
+  - platform: group
+    name: Bedroom James
+    entities:
+      - light.bedroom_james_ceiling_1
+      - light.bedroom_james_ceiling_2
+      - light.bedroom_james_lamp
+      
+  - platform: group
+    name: Bedroom Nathan
+    entities:
+      - light.bedroom_nathan_ceiling_1
+      - light.bedroom_nathan_ceiling_2
+      - light.bedroom_nathan_lamp
+      
+  - platform: group
+    name: Laundry
+    entities:
+      - light.laundry_1
+      - light.laundry_2
+      
+  - platform: group
+    name: Garage
+    entities:
+      - light.inside_garage_1
+      - light.inside_garage_2
+      
+  - platform: group
+    name: Outside Lights
+    entities:
+      - light.outside_garage_1
+      - light.outside_garage_2
+      - light.outside_downlight_1
+      - light.outside_downlight_2
+      
+  - platform: group
+    name: Outside Backyard
+    entities:
+      - light.backyard_1
+      - light.backyard_2
+
+  - platform: group
+    name: Media Lights
+    view: no
+    entities:
+      - light.theater_lights
+      - light.washroom_downlights
+      - light.dining_lights
+      - light.formal_lights
+      - light.kitchen_lightstrips
+      - light.kitchen_sink
+      - light.bedroom_hallway_1
+      - light.bedroom_hallway_2

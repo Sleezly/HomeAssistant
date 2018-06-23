@@ -33,6 +33,9 @@ config:
 http:
   api_password: !secret http_password
 
+  #  trusted_networks:
+#    - 192.168.1.20
+    
   #base_url: www.leslietrowbridge.com:8123
 
   #server_port: 8123
@@ -66,14 +69,19 @@ logbook:
 #map:
 
 # Track the sun
-sun:
+#sun:
 
 # Text to speech
 tts:
   - platform: google
 
 # MQTT
-#mqtt:
+mqtt:
+  
+mqtt_statestream:
+  base_topic: homeassistant
+  publish_attributes: false
+  publish_timestamps: false
 
 panel_iframe:
   configurator:
@@ -106,14 +114,10 @@ nest:
 
 hue:
   bridges:
-    - host: 192.168.1.9
-      filename: phue-0017882bca40.conf
-      allow_unreachable: false
-      allow_hue_groups: false
     - host: 192.168.1.15
       filename: phue-0017886e5a54.conf
-      allow_unreachable: false
-      allow_hue_groups: false
+    - host: 192.168.1.99
+      filename: phue-0017882bca40.conf
 
 #camera:
 #  - platform: yi
@@ -144,6 +148,29 @@ switch:
     body_on: '{"On": "true"}'
     body_off: '{"On": "false"}'
     is_on_template: '{{value_json.On}}'
+    
+  - platform: rest
+    resource: !secret hue_sensor_presence_guest
+    name: Guest
+    method: put
+    body_on: '{"state": {"presence": true} }'
+    body_off: '{"state": {"presence": false} }'
+    is_on_template: '{{value_json.state.presence}}'
+
+rest_command:
+  pc_source_select_aux:
+    url: !secret soundtouch_wireless_link
+    method: POST
+    headers:
+      content-type: application/xml
+    payload: '<ContentItem source="AUX" sourceAccount="AUX"></ContentItem>'
+
+  pc_source_select_bluetooth:
+    url: !secret soundtouch_wireless_link
+    method: POST
+    headers:
+      content-type: application/xml
+    payload: '<ContentItem source="BLUETOOTH"></ContentItem>'
 
 weblink:
   entities: 
@@ -187,6 +214,9 @@ input_text:
     name: Music UID
     initial: None
     
+# Lights
+light: !include lights.yaml
+
 # Sensors
 sensor: !include sensors.yaml
     

@@ -13,7 +13,9 @@
       entity_id: switch.yi_home_camera_smart_plug
     - service: switch.turn_on
       entity_id: switch.flux
-
+    - service: automation.turn_on
+      entity_id: automation.auto41
+      
 # Actions for home exit
 - id: auto2
   alias: Actions When Leaving Home
@@ -29,6 +31,8 @@
       entity_id: switch.yi_home_camera_smart_plug
     - service: switch.turn_off
       entity_id: switch.flux
+    - service: automation.turn_off
+      entity_id: automation.auto41
 
 # Hallway sensor intruder alert
 - id: auto3
@@ -78,6 +82,33 @@
       title: "Intruder Alert: Garage"
       message: "Detected motion in the garage."
 
+# Garage sensor intruder alert
+- id: auto41
+  alias: Motion Alert Garage
+  initial_state: true
+  hide_entity: false
+  trigger:
+  - entity_id: sensor.garage_motion
+    from: '0'
+    platform: state
+    to: '1'
+  - entity_id: sensor.garage_motion
+    from: '0'
+    platform: state
+    to: '2'
+  condition:
+    condition: and
+    conditions:
+      - condition: time
+        after: '01:00:00'
+      - condition: time
+        before: '07:00:00'
+  action:
+    service: notify.my_pushbullet
+    data_template:
+      title: "Activity Alert: Garage"
+      message: "Detected motion in the garage."
+      
 # Patio sensor intruder alert
 - id: auto5
   alias: Intruder Alert Patio
@@ -149,12 +180,42 @@
 #  - service: media_player.soundtouch_play_everywhere
 #    data:
 #      master: media_player.kitchen
- 
+
+- id: pc_speaker_keep_alive
+  alias: "PC Set Source"
+  initial_state: true
+  trigger:
+    - entity_id: media_player.pc
+      platform: state
+      to: 'off'
+  action:
+    - service: rest_command.pc_source_select_aux
+      
+- id: update_friendly_names
+  alias: "Set Forecast Day Names"
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.forecast_1
+        - sensor.forecast_2
+        - sensor.forecast_3
+        - sensor.forecast_4
+        - sensor.forecast_5
+        - sensor.forecast_6
+    - platform: homeassistant
+      event: start
+  action:
+    - service: python_script.dark_sky_friendly_names
+      data_template:
+        entityid: '{{trigger.entity_id}}'
+          
 #            {% if is_state("input_text.rfid_uid", "74920810") %} script.toggle_play_everywhere
 
 # RFID Reader Duplicate Trigger Script
 - id: auto9
   alias: RFID Duplicate Interpreter
+  initial_state: true
   trigger:
   - platform: state
     entity_id: input_text.rfid_uid
@@ -176,6 +237,7 @@
 # RFID Reader Trigger Script
 - id: auto8
   alias: RFID Interpreter
+  initial_state: true
   trigger:
   - platform: state
     entity_id: input_text.rfid_uid
@@ -188,6 +250,7 @@
   action:
   - service: script.turn_on
     entity_id: script.spotify_select_source
+  - delay: '00:00:01'
   - service: script.turn_on
     data_template:
       entity_id: >
@@ -197,15 +260,11 @@
         {% elif is_state("input_text.rfid_uid", "72695658") %} script.play_seven_lions
         {% elif is_state("input_text.rfid_uid", "69164394") %} script.play_meghan_trainor
         {% elif is_state("input_text.rfid_uid", "73226346") %} script.play_deep_focus
+        {% elif is_state("input_text.rfid_uid", "79371370") %} script.play_country_icon
+        {% elif is_state("input_text.rfid_uid", "71271274") %} script.play_josh_turner
         {% endif %}
   - service: script.turn_on
-    entity_id: script.spotify_shuffle_set
-  - service: script.turn_on
     entity_id: script.kitchen_volume_set
-  - service: script.turn_on
-    entity_id: script.kitchen_media_play
-  - service: script.turn_on
-    entity_id: script.play_everywhere
   - service: input_text.set_value
     data_template:
       entity_id: input_text.rfid_uid_last
@@ -214,9 +273,19 @@
     data:
       entity_id: input_text.rfid_uid
       value: None
+  - delay: '00:00:01'
+  - service: script.turn_on
+    entity_id: script.spotify_shuffle_set
+  - service: script.turn_on
+    entity_id: script.play_everywhere
+#  - service: script.turn_on
+#    entity_id: script.kitchen_turn_on
+#  - service: script.turn_on
+#    entity_id: script.kitchen_media_play
       
 - id: auto10
   alias: Reset Duplicate ID on Stop Playing
+  initial_state: true
   trigger:
   - platform: state
     entity_id: media_player.kitchen

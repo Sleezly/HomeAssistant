@@ -1,3 +1,7 @@
+  - platform: time_date
+    display_options:
+      - 'date_time'
+
   - platform: pi_hole
     monitored_conditions:
     
@@ -28,7 +32,7 @@
   - platform: rest
     resource: !secret hue_sensor_motion_garage
     value_template: '{{ value_json.state.status }}'
-    scan_interval: 120
+    scan_interval: 5
     name: 'Garage Motion'
 
   - platform: rest
@@ -53,13 +57,13 @@
 
   - platform: rest
     resource: !secret flux_controller
-    value_template: '{{ value_json.FluxStatus.FluxColorTemperature }}'
+    value_template: '{{ value_json.LastColorTemperature }}'
     scan_interval: 60
     unit_of_measurement: '°K'
     name: 'Flux'
 
-  - platform: rest
-    resource: !secret flux_controller
-    value_template: '{{ value_json.On }}'
-    scan_interval: 60
-    name: 'Flux On'
+#  - platform: rest
+#    resource: !secret flux_controller
+#    value_template: '{{ value_json.On }}'
+#    scan_interval: 60
+#    name: 'Flux On'

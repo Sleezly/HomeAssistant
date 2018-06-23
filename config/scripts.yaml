@@ -22,6 +22,40 @@
 #       media_content_id: '1'
 #       media_content_type: 'music'
 
+
+# Hue Scenes
+hue_dinner:
+  alias: "Dinner Lights"
+  sequence:
+  - service: hue.hue_activate_scene
+    data:
+      group_name: Downstairs
+      scene_name: Dinner
+
+hue_relax:
+  alias: "Full Lights"
+  sequence:
+  - service: hue.hue_activate_scene
+    data:
+      group_name: Downstairs
+      scene_name: Flux
+
+hue_tv:
+  alias: "TV Lights"
+  sequence:
+  - service: hue.hue_activate_scene
+    data:
+      group_name: Downstairs
+      scene_name: TV
+
+hue_midnight:
+  alias: "Night Lights"
+  sequence:
+  - service: hue.hue_activate_scene
+    data:
+      group_name: Downstairs
+      scene_name: Midnight Downstairs
+
 play_meghan_trainor:
   alias: 'Play Meghan Trainor'
   sequence:
@@ -76,8 +110,27 @@ play_deep_focus:
       media_content_id: 'spotify:user:spotify:playlist:37i9dQZF1DWZeKCadgRdKQ'
       media_content_type: 'playlist'
 
+play_country_icon:
+  alias: 'Play Country Icon'
+  sequence:
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.spotify
+      media_content_id: 'spotify:user:spotify:playlist:37i9dQZF1DWVpjAJGB70vU'
+      media_content_type: 'playlist'
+
+play_josh_turner:
+  alias: 'Play Josh Turner'
+  sequence:
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.spotify
+      media_content_id: 'spotify:artist:7vCtweS8UVAXTyau2j0rDT'
+      media_content_type: 'playlist'
+      
 # Turns on the Kitchen player if it's currently off
 kitchen_turn_on:
+  alias: Turn On Kitchen
   sequence:
   - condition: template
     value_template: >
@@ -88,14 +141,16 @@ kitchen_turn_on:
 
 # Kitchen Volume
 kitchen_volume_set:
+  alias: Set Kitchen Volume
   sequence:
   - service: media_player.volume_set
     data:
       entity_id: media_player.kitchen
-      volume_level: 0.3
+      volume_level: 0.25
       
 # Starts kitchen playback
 kitchen_media_play:
+  alias: Play Kitchen
   sequence:
   - condition: template
     value_template: >
@@ -106,6 +161,7 @@ kitchen_media_play:
 
 # Sets the Spotify shuffle value
 spotify_shuffle_set:
+  alias: Spotify Set Shuffle
   sequence:
   - condition: template
     value_template: >
@@ -118,6 +174,7 @@ spotify_shuffle_set:
       
 # Set the Spotify source
 spotify_select_source:
+  alias: Spotify Select Source
   sequence:
   - condition: template
     value_template: >
@@ -129,9 +186,9 @@ spotify_select_source:
       entity_id: media_player.spotify
       source: Kitchen
 
-# sdf
+# Safe Play Everywhere
 play_everywhere:
-  alias: 'Play Everywhere'
+  alias: 'Play Everywhere Safe'
   sequence:
   - condition: template
     value_template: >
@@ -143,9 +200,25 @@ play_everywhere:
       master: media_player.kitchen
   - service: media_player.volume_set
     data:
-      entity_id: media_player.tv
-      volume_level: 0.3
-  
+      entity_id: media_player.theater
+      volume_level: 0.2
+
+# Safe Play Everywhere
+play_everywhere_always:
+  alias: 'Play Everywhere'
+  sequence:
+  - service: media_player.soundtouch_play_everywhere
+    data:
+      master: media_player.kitchen
+  - service: media_player.volume_set
+    data:
+      entity_id: media_player.kitchen
+      volume_level: 0.25
+  - service: media_player.volume_set
+    data:
+      entity_id: media_player.theater
+      volume_level: 0.2
+      
 #  - service: media_player.volume_set
 #    data:
 #      entity_id: media_player.theater, media_player.kitchen
