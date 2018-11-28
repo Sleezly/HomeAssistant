@@ -27,34 +27,31 @@
 hue_dinner:
   alias: "Dinner Lights"
   sequence:
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Downstairs
-      scene_name: Dinner
+  - service: rest_command.hue_scene_dinner_downstairs
+  - service: rest_command.hue_scene_dinner_accents
+  - service: rest_command.hue_scene_tv_entry
 
 hue_relax:
   alias: "Full Lights"
   sequence:
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Downstairs
-      scene_name: Flux
-
+  - service: rest_command.hue_scene_flux_downstairs
+  - service: rest_command.hue_scene_flux_accents
+  - service: rest_command.hue_scene_flux_entry
+      
 hue_tv:
   alias: "TV Lights"
   sequence:
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Downstairs
-      scene_name: TV
-
+  - service: rest_command.hue_scene_tv_downstairs
+  - service: rest_command.hue_scene_tv_accents
+  - service: rest_command.hue_scene_tv_entry
+      
 hue_midnight:
   alias: "Night Lights"
   sequence:
   - service: hue.hue_activate_scene
     data:
       group_name: Downstairs
-      scene_name: Midnight Downstairs
+      scene_name: Midnight
 
 play_meghan_trainor:
   alias: 'Play Meghan Trainor'
@@ -127,6 +124,24 @@ play_josh_turner:
       entity_id: media_player.spotify
       media_content_id: 'spotify:artist:7vCtweS8UVAXTyau2j0rDT'
       media_content_type: 'playlist'
+
+play_jo_jo_siwa:
+  alias: 'Play Jo Jo Siwa'
+  sequence:
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.spotify
+      media_content_id: 'spotify:user:tomasete06:playlist:40k6jTpOfkSQjPWvWMieJI'
+      media_content_type: 'playlist'
+
+play_jack_johnson:
+  alias: 'Play Jack Johnson'
+  sequence:
+  - service: media_player.play_media
+    data:
+      entity_id: media_player.spotify
+      media_content_id: 'spotify:artist:3GBPw9NK25X1Wt2OUvOwY3'
+      media_content_type: 'playlist'
       
 # Turns on the Kitchen player if it's currently off
 kitchen_turn_on:
@@ -146,7 +161,7 @@ kitchen_volume_set:
   - service: media_player.volume_set
     data:
       entity_id: media_player.kitchen
-      volume_level: 0.25
+      volume_level: 0.35
       
 # Starts kitchen playback
 kitchen_media_play:
@@ -201,7 +216,7 @@ play_everywhere:
   - service: media_player.volume_set
     data:
       entity_id: media_player.theater
-      volume_level: 0.2
+      volume_level: 0.25
 
 # Safe Play Everywhere
 play_everywhere_always:
@@ -213,11 +228,11 @@ play_everywhere_always:
   - service: media_player.volume_set
     data:
       entity_id: media_player.kitchen
-      volume_level: 0.25
+      volume_level: 0.35
   - service: media_player.volume_set
     data:
       entity_id: media_player.theater
-      volume_level: 0.2
+      volume_level: 0.25
       
 #  - service: media_player.volume_set
 #    data:

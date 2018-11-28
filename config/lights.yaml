@@ -1,4 +1,14 @@
   - platform: group
+    name: Accent Lights
+    entities:
+      - light.tv
+      - light.mantle
+      - light.kitchen_strip_microwave
+      - light.kitchen_strip_oven
+      - light.kitchen_strip_coffee
+      - light.kitchen_strip_dishwasher
+      
+  - platform: group
     name: Theater Lights
     entities:
       - light.theater_lamp_1
@@ -19,7 +29,7 @@
       - light.dining_table
       
   - platform: group
-    name: Formal Lights
+    name: Office Lights
     entities:
       - light.office_1
       - light.office_2
@@ -37,21 +47,57 @@
       - light.kitchen_strip_dishwasher
       
   - platform: group
-    name: Kitchen Ceiling
+    name: Kitchen Lights
     entities:
       - light.kitchen_sink
       - light.kitchen_ceiling_1
       - light.kitchen_ceiling_2
       - light.kitchen_ceiling_3
       - light.kitchen_ceiling_4
-
+      - light.kitchen_strip_microwave
+      - light.kitchen_strip_oven
+      - light.kitchen_strip_coffee
+      - light.kitchen_strip_dishwasher
+      
   - platform: group
     name: Entry Lights
     entities:
       - light.entry_1
       - light.entry_2
       - light.entry_3
-
+     
+  - platform: group
+    name: Downstairs Lights
+    entities:
+      - light.theater_lamp_1
+      - light.theater_lamp_2
+      - light.tv
+      - light.mantle
+      - light.entry_1
+      - light.entry_2
+      - light.entry_3
+      - light.kitchen_sink
+      - light.kitchen_ceiling_1
+      - light.kitchen_ceiling_2
+      - light.kitchen_ceiling_3
+      - light.kitchen_ceiling_4
+      - light.kitchen_strip_microwave
+      - light.kitchen_strip_oven
+      - light.kitchen_strip_coffee
+      - light.kitchen_strip_dishwasher
+      - light.office_1
+      - light.office_2
+      - light.office_3
+      - light.formal_dining_1
+      - light.formal_dining_2
+      - light.formal_dining_3
+      - light.dining_table     
+      - light.washroom_downlight_1
+      - light.washroom_downlight_2
+      - light.mantle_ceiling_1
+      - light.mantle_ceiling_2
+      - light.mantle_ceiling_3
+      
   - platform: group
     name: Bedroom Hallway
     entities:

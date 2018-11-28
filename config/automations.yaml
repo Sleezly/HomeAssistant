@@ -11,8 +11,6 @@
   action:
     - service: switch.turn_off
       entity_id: switch.yi_home_camera_smart_plug
-    - service: switch.turn_on
-      entity_id: switch.flux
     - service: automation.turn_on
       entity_id: automation.auto41
       
@@ -29,8 +27,6 @@
   action:
     - service: switch.turn_on
       entity_id: switch.yi_home_camera_smart_plug
-    - service: switch.turn_off
-      entity_id: switch.flux
     - service: automation.turn_off
       entity_id: automation.auto41
 
@@ -159,6 +155,22 @@
     data:
       message: "Motion alert for upstairs hallway!"
 
+# Hue Motion Sensor Light Level Update to Flux
+- id: flux_lightlevel
+  alias: Flux Lightlevel
+  initial_state: true
+  hide_entity: false
+  trigger:
+  - entity_id: sensor.outside_lightlevel
+    platform: state
+  action:
+    - service: rest_command.flux_lightlevel_set
+
+#  condition: 
+#    condition: state
+#    entity_id: sensor.daylight
+#    state: 'true'
+    
  # Bose Presets
 #- id: auto7
 #  alias: Bose Presets
@@ -262,6 +274,8 @@
         {% elif is_state("input_text.rfid_uid", "73226346") %} script.play_deep_focus
         {% elif is_state("input_text.rfid_uid", "79371370") %} script.play_country_icon
         {% elif is_state("input_text.rfid_uid", "71271274") %} script.play_josh_turner
+        {% elif is_state("input_text.rfid_uid", "81564778") %} script.play_jo_jo_siwa
+        {% elif is_state("input_text.rfid_uid", "77112170") %} script.play_jack_johnson
         {% endif %}
   - service: script.turn_on
     entity_id: script.kitchen_volume_set

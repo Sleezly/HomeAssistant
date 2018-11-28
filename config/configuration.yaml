@@ -77,6 +77,9 @@ tts:
 
 # MQTT
 mqtt:
+  broker: core-mosquitto
+  username: mqttadmin
+  password: !secret http_password
   
 mqtt_statestream:
   base_topic: homeassistant
@@ -87,37 +90,22 @@ panel_iframe:
   configurator:
     title: Configurator
     icon: mdi:pencil-box
-    url: http://hassio.local:3218
+    url: http://192.168.1.2:3218
   pihole:
     title: Pi-Hole
     icon: mdi:pi-box
-    url: http://hassio.local/admin/index.php
+    url: http://192.168.1.2:4865/admin/index.php
   
 nest:
   client_id: 1306e457-cc9a-4cd2-9dd8-757fd3c4c8d2
   client_secret: oE9OVAZGfuYUcYLEhh94fEDsi
 
-#cloud:
-
-#alexa:
-#  smart_home:
-#    filter:
-#      include_entities:
-#        - scene.dinner
-#        - scene.tv
-      # entity_config:
-      #   light.family_room
-      #     name: Yi Home Family Room
-      #     description: Camera
-
-#ios:
-
 hue:
   bridges:
-    - host: 192.168.1.15
-      filename: phue-0017886e5a54.conf
-    - host: 192.168.1.99
+    - host: 192.168.1.49
       filename: phue-0017882bca40.conf
+    - host: 192.168.1.18
+      filename: phue-0017886e5a54.conf
 
 #camera:
 #  - platform: yi
@@ -131,13 +119,13 @@ notify:
     api_key: !secret pubhbullet_access_token
     
   - platform: webostv
-    host: 192.168.1.6
+    host: 192.168.1.3
     name: TV
     filename: webostv.conf
 
 switch:
   - platform: tplink
-    host: 192.168.1.132
+    host: 192.168.1.9
     name: Yi Home Camera Smart Plug
     enable_leds: true
 
@@ -145,8 +133,8 @@ switch:
     resource: !secret flux_controller
     name: Flux
     method: post
-    body_on: '{"On": "true"}'
-    body_off: '{"On": "false"}'
+    body_on: '{"On": "on", "LightLevel": {{states.sensor.outside_lightlevel.state}}}'
+    body_off: '{"On": "off", "LightLevel": {{states.sensor.outside_lightlevel.state}}}'
     is_on_template: '{{value_json.On}}'
     
   - platform: rest
@@ -172,29 +160,89 @@ rest_command:
       content-type: application/xml
     payload: '<ContentItem source="BLUETOOTH"></ContentItem>'
 
+  flux_lightlevel_set:
+    url: !secret flux_controller
+    method: POST
+    headers:
+      content-type: application/json
+    payload: '{"On": "{{states.switch.flux.state}}", "LightLevel": {{states.sensor.outside_lightlevel.state}}}'
+
+  hue_scene_flux_downstairs:
+    url: !secret hue_group_downstairs
+    method: PUT
+    headers:
+      content-type: application/json
+    payload: '{"scene": "jMKL69svqAiNZQX"}'
+        
+  hue_scene_flux_accents:
+    url: !secret hue_group_accents
+    method: PUT
+    headers:
+      content-type: application/json
+    payload: '{"scene": "sz5EjmPFCe8YpAy"}'
+    
+  hue_scene_flux_entry:
+    url: !secret hue_group_entry
+    method: PUT
+    headers:
+      content-type: application/json
+    payload: '{"scene": "6bQ9M0k6623AXPv"}'
+    
+  hue_scene_dinner_downstairs:
+    url: !secret hue_group_downstairs
+    method: PUT
+    headers:
+      content-type: application/json
+    payload: '{"scene": "i2U-rnmqfdLoXWo"}'
+    
+  hue_scene_dinner_accents:
+    url: !secret hue_group_accents
+    method: PUT
+    headers:
+      content-type: application/json
+    payload: '{"scene": "v4lk94YAJcqWVgO"}'
+    
+  hue_scene_tv_downstairs:
+    url: !secret hue_group_downstairs
+    method: PUT
+    headers:
+      content-type: application/json
+    payload: '{"scene": "KhsOwuhiiveLp9L"}'
+    
+  hue_scene_tv_accents:
+    url: !secret hue_group_accents
+    method: PUT
+    headers:
+      content-type: application/json
+    payload: '{"scene": "G-OozK7uewVS9WK"}'
+    
+  hue_scene_tv_entry:
+    url: !secret hue_group_entry
+    method: PUT
+    headers:
+      content-type: application/json
+    payload: '{"scene": "BD3-jG4I1eM6I8C"}'
+    
 weblink:
   entities: 
     - name: Router
       url: http://192.168.1.1
       icon: mdi:router-wireless
     - name: Diskstation
-      url: http://192.168.1.100
+      url: http://192.168.1.22
       icon: mdi:server-network
+    - name: Photos
+      url: https://onedrive.live.com/?v=photos&id=root&cid=DE5085E9F55CC2ED&qt=allmyphotos
+      icon: mdi:onedrive
 
 media_player:
   - platform: webostv
-    host: 192.168.1.6
+    host: 192.168.1.3
     name: TV
     filename: webostv.conf
   - platform: spotify
     client_id: !secret spotify_client_id
     client_secret: !secret spotify_client_secret
-
-#    aliases:
-#      a0a685f52516a17eac7fcdbee4a23274af660a21: 'Pheonix'
-#      19b6395384b693858a9d9197af0601b8ffbc8eef: 'Kitchen'
-#      657937158191e93524b89a8af65addcfa2730d95: 'Theater'
-#      eaf643e7ef6b4cfbd0a9d1350bac5553f9067299: 'iPhone'
 
 #input_number:
 #  kitchen:
@@ -219,7 +267,7 @@ light: !include lights.yaml
 
 # Sensors
 sensor: !include sensors.yaml
-    
+
 # Display
 group: !include groups.yaml
 

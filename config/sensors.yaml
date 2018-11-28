@@ -56,14 +56,224 @@
     name: 'Outside Temp'
 
   - platform: rest
+    resource: !secret hue_sensor_lightlevel_outside
+    value_template: '{{ value_json.state.lightlevel }}'
+    scan_interval: 120
+    unit_of_measurement: 'LUX'
+    name: 'Outside Lightlevel'
+
+#  - platform: rest
+#    resource: !secret hue_sensor_lightlevel_outside
+#    value_template: '{{ value_json.state.daylight }}'
+#    scan_interval: 120
+#    name: 'Daylight'
+    
+  - platform: rest
     resource: !secret flux_controller
     value_template: '{{ value_json.LastColorTemperature }}'
     scan_interval: 60
     unit_of_measurement: '°K'
     name: 'Flux'
 
-#  - platform: rest
-#    resource: !secret flux_controller
-#    value_template: '{{ value_json.On }}'
-#    scan_interval: 60
-#    name: 'Flux On'
+  - platform: rest
+    resource: !secret flux_controller
+    value_template: '{{ value_json.LastBrightness }}'
+    scan_interval: 60
+    unit_of_measurement: 'BYTE'
+    name: 'Flux Brightness'
+
+
+# SkyNet Current Conditions
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Temperature }}'
+    scan_interval: 60
+    unit_of_measurement: '°F'
+    name: 'Temperature'
+    
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Icon }}'
+    scan_interval: 60
+    name: 'SkyNet Current Icon'
+
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Summary }}'
+    scan_interval: 60
+    name: 'SkyNet Daily Summary'
+          
+# SkyNet Forecast for Today
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Daily[0].High }}'
+    scan_interval: 60
+    name: 'SkyNet Forecast Today High'
+
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Daily[0].Low }}'
+    scan_interval: 60
+    name: 'SkyNet Forecast Today Low'
+
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Daily[0].Percipitation }}'
+    scan_interval: 60
+    name: 'SkyNet Forecast Today Percipitation'
+
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Daily[0].Icon }}'
+    scan_interval: 60
+    name: 'SkyNet Forecast Today Icon'
+
+# SkyNet Forecast for 1
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Daily[1].High }}'
+    scan_interval: 60
+    name: 'SkyNet Forecast 1 High'
+
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Daily[1].Low }}'
+    scan_interval: 60
+    name: 'SkyNet Forecast 1 Low'
+
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Daily[1].Percipitation }}'
+    scan_interval: 60
+    name: 'SkyNet Forecast 1 Percipitation'
+
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Daily[1].Icon }}'
+    scan_interval: 60
+    name: 'SkyNet Forecast 1 Icon'
+
+# SkyNet Forecast for 2
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Daily[2].High }}'
+    scan_interval: 60
+    name: 'SkyNet Forecast 2 High'
+
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Daily[2].Low }}'
+    scan_interval: 60
+    name: 'SkyNet Forecast 2 Low'
+
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Daily[2].Percipitation }}'
+    scan_interval: 60
+    name: 'SkyNet Forecast 2 Percipitation'
+
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Daily[2].Icon }}'
+    scan_interval: 60
+    name: 'SkyNet Forecast 2 Icon'
+    
+# SkyNet Forecast for 3
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Daily[3].High }}'
+    scan_interval: 60
+    name: 'SkyNet Forecast 3 High'
+
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Daily[3].Low }}'
+    scan_interval: 60
+    name: 'SkyNet Forecast 3 Low'
+
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Daily[3].Percipitation }}'
+    scan_interval: 60
+    name: 'SkyNet Forecast 3 Percipitation'
+
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Daily[3].Icon }}'
+    scan_interval: 60
+    name: 'SkyNet Forecast 3 Icon'
+
+# SkyNet Forecast for 4
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Daily[4].High }}'
+    scan_interval: 60
+    name: 'SkyNet Forecast 4 High'
+
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Daily[4].Low }}'
+    scan_interval: 60
+    name: 'SkyNet Forecast 4 Low'
+
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Daily[4].Percipitation }}'
+    scan_interval: 60
+    name: 'SkyNet Forecast 4 Percipitation'
+
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Daily[4].Icon }}'
+    scan_interval: 60
+    name: 'SkyNet Forecast 4 Icon'
+
+# SkyNet Forecast for 5
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Daily[5].High }}'
+    scan_interval: 60
+    name: 'SkyNet Forecast 5 High'
+
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Daily[5].Low }}'
+    scan_interval: 60
+    name: 'SkyNet Forecast 5 Low'
+
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Daily[5].Percipitation }}'
+    scan_interval: 60
+    name: 'SkyNet Forecast 5 Percipitation'
+
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Daily[5].Icon }}'
+    scan_interval: 60
+    name: 'SkyNet Forecast 5 Icon'
+
+# SkyNet Forecast for 6
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Daily[6].High }}'
+    scan_interval: 60
+    name: 'SkyNet Forecast 6 High'
+
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Daily[6].Low }}'
+    scan_interval: 60
+    name: 'SkyNet Forecast 6 Low'
+
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Daily[6].Percipitation }}'
+    scan_interval: 60
+    name: 'SkyNet Forecast 6 Percipitation'
+
+  - platform: rest
+    resource: !secret skynet_controller
+    value_template: '{{ value_json.Daily[6].Icon }}'
+    scan_interval: 60
+    name: 'SkyNet Forecast 6 Icon'

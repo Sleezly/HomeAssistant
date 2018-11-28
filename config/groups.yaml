@@ -18,19 +18,20 @@
       - media_player.kitchen
       - media_player.theater
       - media_player.pc
-      - media_player.tv
+      - weblink.photos
+#      - media_player.tv
 
   downstairs_lights_view:
     name: Downstairs Lights
     view: yes
     icon: mdi:lightbulb-on
     entities:
+      - light.downstairs_lights
+      - light.accent_lights
       - light.theater_lights
+      - light.kitchen_lights
       - light.dining_lights
-      - light.formal_lights
-      - light.kitchen_ceiling
-      - light.kitchen_lightstrips
-      - light.washroom_downlights
+      - light.office_lights
       - light.entry_lights
       
   music_view:
@@ -46,6 +47,8 @@
       - script.play_deep_focus
       - script.play_country_icon
       - script.play_josh_turner
+      - script.play_jack_johnson
+      - script.play_jo_jo_siwa
       
   bedroom_lights_view:
     name: Bedroom Lights
@@ -65,11 +68,14 @@
     entities:
       - sensor.outside_temp
       - sensor.hallway_temp
+      - sensor.outside_lightlevel
       - sensor.flux
+      - sensor.flux_brightness
       - switch.flux
       - sensor.garage_motion
       - sensor.hallway_motion
       - sensor.patio_motion
+#      - sensor.daylight
       
   security_view:
     view: yes
@@ -123,8 +129,8 @@
       - sensor.forecast_4
       - sensor.forecast_5
       - sensor.forecast_6
-      - sensor.dark_sky_temperature
-      - sensor.dark_sky_daily_summary
+      - sensor.temperature
+      - sensor.forecast_summary
   
   scene_card:
     name: Scenes
