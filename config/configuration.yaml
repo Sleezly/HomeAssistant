@@ -97,14 +97,14 @@ panel_iframe:
     url: http://192.168.1.2:4865/admin/index.php
   
 nest:
-  client_id: 1306e457-cc9a-4cd2-9dd8-757fd3c4c8d2
-  client_secret: oE9OVAZGfuYUcYLEhh94fEDsi
+  client_id: !secret nest_client_id
+  client_secret: !secret oE9OVAZGfuYUcYLEhh94fEDsi
 
 hue:
   bridges:
-    - host: 192.168.1.49
+    - host: !secret hue_primary_ip
       filename: phue-0017882bca40.conf
-    - host: 192.168.1.18
+    - host: !secret hue_outdoor_ip
       filename: phue-0017886e5a54.conf
 
 #camera:
