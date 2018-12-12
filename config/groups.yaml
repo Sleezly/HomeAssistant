@@ -87,6 +87,8 @@
       - sensor.me_home
       - switch.guest
       - switch.yi_home_camera_smart_plug
+      - switch.door_alarms
+      - sensor.pantry_door
       - light.outside_lights
 
   rfid_view:

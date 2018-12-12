@@ -144,6 +144,12 @@ switch:
     body_on: '{"state": {"presence": true} }'
     body_off: '{"state": {"presence": false} }'
     is_on_template: '{{value_json.state.presence}}'
+    
+  - platform: mqtt
+    name: "Door Alarms"
+    command_topic: "home/alarms"
+    payload_on: '{ "State": "On" }'
+    payload_off: '{ "State": "Off" }'
 
 rest_command:
   pc_source_select_aux:

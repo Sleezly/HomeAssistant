@@ -82,7 +82,12 @@
     unit_of_measurement: 'BYTE'
     name: 'Flux Brightness'
 
-
+# Contact Sensors
+  - platform: mqtt
+    name: 'Pantry Door'
+    state_topic: "home/pantry"
+    value_template: '{{ value_json.Door }}'
+    
 # SkyNet Current Conditions
   - platform: rest
     resource: !secret skynet_controller
