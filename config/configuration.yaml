@@ -238,7 +238,7 @@ weblink:
       url: http://192.168.1.22
       icon: mdi:server-network
     - name: Photos
-      url: https://onedrive.live.com/?v=photos&id=root&cid=DE5085E9F55CC2ED&qt=allmyphotos
+      url: !secret onedrive_photos
       icon: mdi:onedrive
 
 media_player:
