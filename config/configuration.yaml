@@ -98,7 +98,7 @@ panel_iframe:
   
 nest:
   client_id: !secret nest_client_id
-  client_secret: !secret oE9OVAZGfuYUcYLEhh94fEDsi
+  client_secret: !secret nest_client_secret
 
 hue:
   bridges:
