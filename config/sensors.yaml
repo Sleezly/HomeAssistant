@@ -3,7 +3,7 @@
       - 'date_time'
 
   - platform: pi_hole
-    monitored_conditions:
+    host: localhost:4865
     
   - platform: rest
     resource: !secret hue_sensor_presence_anybody

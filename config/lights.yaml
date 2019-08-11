@@ -21,13 +21,12 @@
     entities:
       - light.washroom_downlight_1
       - light.washroom_downlight_2
-      
+
   - platform: group
     name: Dining Lights
-    view: no
     entities:
       - light.dining_table
-      
+
   - platform: group
     name: Office Lights
     entities:
@@ -107,7 +106,6 @@
 
   - platform: group
     name: Master Lights
-    view: no
     entities:
       - light.bedroom_master_ceiling_1
       - light.bedroom_master_ceiling_2
@@ -130,26 +128,32 @@
       - light.bedroom_james_ceiling_1
       - light.bedroom_james_ceiling_2
       - light.bedroom_james_lamp
-      
+
   - platform: group
     name: Bedroom Nathan
     entities:
       - light.bedroom_nathan_ceiling_1
       - light.bedroom_nathan_ceiling_2
       - light.bedroom_nathan_lamp
-      
+
+  - platform: group
+    name: Bathroom
+    entities:
+    - light.bathroom_1
+    - light.bathroom_2
+    - light.bathroom_3
+
   - platform: group
     name: Laundry
     entities:
-      - light.laundry_1
       - light.laundry_2
-      
+
   - platform: group
     name: Garage
     entities:
       - light.inside_garage_1
       - light.inside_garage_2
-      
+
   - platform: group
     name: Outside Lights
     entities:
@@ -157,7 +161,7 @@
       - light.outside_garage_2
       - light.outside_downlight_1
       - light.outside_downlight_2
-      
+
   - platform: group
     name: Outside Backyard
     entities:
@@ -166,7 +170,6 @@
 
   - platform: group
     name: Media Lights
-    view: no
     entities:
       - light.theater_lights
       - light.washroom_downlights

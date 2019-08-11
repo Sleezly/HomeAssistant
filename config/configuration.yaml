@@ -55,6 +55,8 @@ updater:
 
 # Discover some devices automatically
 discovery:
+  ignore:
+    - igd
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
@@ -65,6 +67,8 @@ history:
 # View all events in a logbook
 logbook:
 
+system_health:
+
 # Enables a map showing the location of tracked devices
 #map:
 
@@ -73,7 +77,8 @@ logbook:
 
 # Text to speech
 tts:
-  - platform: google
+  - platform: google_translate
+    service_name: google_say
 
 # MQTT
 mqtt:
@@ -87,31 +92,22 @@ mqtt_statestream:
   publish_timestamps: false
 
 panel_iframe:
-  configurator:
-    title: Configurator
-    icon: mdi:pencil-box
-    url: http://192.168.1.2:3218
   pihole:
     title: Pi-Hole
     icon: mdi:pi-box
     url: http://192.168.1.2:4865/admin/index.php
-  
+
 nest:
   client_id: !secret nest_client_id
   client_secret: !secret nest_client_secret
 
 hue:
   bridges:
-    - host: !secret hue_primary_ip
+    - host: 192.168.1.49
       filename: phue-0017882bca40.conf
-    - host: !secret hue_outdoor_ip
+    - host: 192.168.1.18
       filename: phue-0017886e5a54.conf
 
-#camera:
-#  - platform: yi
-#    name: Family Room
-#    host: '192.168.1.2'
-#    password: !secret yi_home_secret
 
 notify:
   - name: My PushBullet
@@ -123,12 +119,14 @@ notify:
     name: TV
     filename: webostv.conf
 
-switch:
-  - platform: tplink
-    host: 192.168.1.9
-    name: Yi Home Camera Smart Plug
-    enable_leds: true
 
+tplink:
+  discovery: false
+  switch:
+    - host: 192.168.1.9
+    - host: 192.168.1.13
+    
+switch:
   - platform: rest
     resource: !secret flux_controller
     name: Flux

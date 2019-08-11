@@ -216,11 +216,11 @@ play_everywhere:
   - service: media_player.volume_set
     data:
       entity_id: media_player.theater
-      volume_level: 0.25
+      volume_level: 0.18
 
 # Safe Play Everywhere
 play_everywhere_always:
-  alias: 'Play Everywhere'
+  alias: 'Pair All to Kitchen'
   sequence:
   - service: media_player.soundtouch_play_everywhere
     data:
@@ -232,8 +232,43 @@ play_everywhere_always:
   - service: media_player.volume_set
     data:
       entity_id: media_player.theater
-      volume_level: 0.25
+      volume_level: 0.18
       
+# Play PC
+play_everywhere_pc:
+  alias: 'Pair All to PC'
+  sequence:
+  - service: media_player.soundtouch_play_everywhere
+    data:
+      master: media_player.pc
+  - service: media_player.volume_set
+    data:
+      entity_id: media_player.kitchen
+      volume_level: 0.35
+  - service: media_player.volume_set
+    data:
+      entity_id: media_player.theater
+      volume_level: 0.18
+      
+# Pair PC to Kitchen
+pair_pc_to_kitchen:
+  alias: 'Pair PC to Kitchen'
+  sequence:
+  - service: media_player.soundtouch_create_zone
+    data:
+      master: media_player.kitchen
+      slaves: media_player.pc
+  - service: media_player.volume_set
+    data:
+      entity_id: media_player.kitchen
+      volume_level: 0.35
+
+# Restart Home Assistant
+home_assistant_restart:
+  alias: Restart
+  sequence:
+  - service: homeassistant.restart
+
 #  - service: media_player.volume_set
 #    data:
 #      entity_id: media_player.theater, media_player.kitchen

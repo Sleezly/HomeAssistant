@@ -10,7 +10,7 @@
     to: 'True'
   action:
     - service: switch.turn_off
-      entity_id: switch.yi_home_camera_smart_plug
+      entity_id: switch.yi_camera_smart_plug
     - service: automation.turn_on
       entity_id: automation.auto41
       
@@ -26,7 +26,7 @@
     to: 'False'
   action:
     - service: switch.turn_on
-      entity_id: switch.yi_home_camera_smart_plug
+      entity_id: switch.yi_camera_smart_plug
     - service: automation.turn_off
       entity_id: automation.auto41
 
