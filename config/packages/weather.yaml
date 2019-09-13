@@ -1,0 +1,250 @@
+sensor:
+  - platform: template
+    sensors:
+      forecast_today:
+        friendly_name: "Today"
+        value_template: >
+          {{states.sensor.skynet_forecast_today_high.state}}°/{{states.sensor.skynet_forecast_today_low.state}}°/{{states.sensor.skynet_forecast_today_percipitation.state}}%
+        icon_template: >-
+          {% if is_state("sensor.skynet_forecast_today_icon", "weather-sunny") %}
+            mdi:weather-sunny
+          {% elif is_state("sensor.skynet_forecast_today_icon", "weather-night") %}
+            mdi:weather-night
+          {% elif is_state("sensor.skynet_forecast_today_icon", "weather-cloudy") %}
+            mdi:weather-cloudy
+          {% elif is_state("sensor.skynet_forecast_today_icon", "weather-pouring") %}
+            mdi:weather-pouring
+          {% elif is_state("sensor.skynet_forecast_today_icon", "weather-snowy-rainy") %}
+            mdi:weather-snowy-rainy
+          {% elif is_state("sensor.skynet_forecast_today_icon", "weather-snowy") %}
+            mdi:weather-snowy
+          {% elif is_state("sensor.skynet_forecast_today_icon", "weather-windy") %}
+            mdi:weather-windy
+          {% elif is_state("sensor.skynet_forecast_today_icon", "weather-fog") %}
+            mdi:weather-fog
+          {% elif is_state("sensor.skynet_forecast_today_icon", "weather-partly-cloudy") %}
+            mdi:weather-partly-cloudy
+          {% elif is_state("sensor.skynet_forecast_today_icon", "weather-night-partly-cloudy") %}
+            mdi:weather-night-partly-cloudy
+          {% elif is_state("sensor.skynet_forecast_today_icon", "weather-lightning-rainy") %}
+            mdi:weather-lightning-rainy
+          {% else %}
+            error
+          {% endif %}
+          
+      forecast_summary:
+        friendly_name: "Forecast"
+        value_template: >
+          {{states.sensor.skynet_daily_summary.state}}
+        icon_template: >-
+          {% if is_state("sensor.skynet_forecast_today_icon", "weather-sunny") %}
+            mdi:weather-sunny
+          {% elif is_state("sensor.skynet_forecast_today_icon", "weather-night") %}
+            mdi:weather-night
+          {% elif is_state("sensor.skynet_forecast_today_icon", "weather-cloudy") %}
+            mdi:weather-cloudy
+          {% elif is_state("sensor.skynet_forecast_today_icon", "weather-pouring") %}
+            mdi:weather-pouring
+          {% elif is_state("sensor.skynet_forecast_today_icon", "weather-snowy-rainy") %}
+            mdi:weather-snowy-rainy
+          {% elif is_state("sensor.skynet_forecast_today_icon", "weather-snowy") %}
+            mdi:weather-snowy
+          {% elif is_state("sensor.skynet_forecast_today_icon", "weather-windy") %}
+            mdi:weather-windy
+          {% elif is_state("sensor.skynet_forecast_today_icon", "weather-fog") %}
+            mdi:weather-fog
+          {% elif is_state("sensor.skynet_forecast_today_icon", "weather-partly-cloudy") %}
+            mdi:weather-partly-cloudy
+          {% elif is_state("sensor.skynet_forecast_today_icon", "weather-night-partly-cloudy") %}
+            mdi:weather-sunny
+          {% elif is_state("sensor.skynet_forecast_today_icon", "weather-lightning-rainy") %}
+            mdi:weather-lightning-rainy
+          {% else %}
+            error
+          {% endif %}
+
+      forecast_1:
+        friendly_name: 'First'
+        value_template: >          
+          {{states.sensor.skynet_forecast_1_high.state}}°/{{states.sensor.skynet_forecast_1_low.state}}°/{{states.sensor.skynet_forecast_1_percipitation.state}}%
+        icon_template: >-
+          {% if is_state("sensor.skynet_forecast_1_icon", "weather-sunny") %}
+            mdi:weather-sunny
+          {% elif is_state("sensor.skynet_forecast_1_icon", "weather-night") %}
+            mdi:weather-night
+          {% elif is_state("sensor.skynet_forecast_1_icon", "weather-cloudy") %}
+            mdi:weather-cloudy
+          {% elif is_state("sensor.skynet_forecast_1_icon", "weather-pouring") %}
+            mdi:weather-pouring
+          {% elif is_state("sensor.skynet_forecast_1_icon", "weather-snowy-rainy") %}
+            mdi:weather-snowy-rainy
+          {% elif is_state("sensor.skynet_forecast_1_icon", "weather-snowy") %}
+            mdi:weather-snowy
+          {% elif is_state("sensor.skynet_forecast_1_icon", "weather-windy") %}
+            mdi:weather-windy
+          {% elif is_state("sensor.skynet_forecast_1_icon", "weather-fog") %}
+            mdi:weather-fog
+          {% elif is_state("sensor.skynet_forecast_1_icon", "weather-partly-cloudy") %}
+            mdi:weather-partly-cloudy
+          {% elif is_state("sensor.skynet_forecast_1_icon", "weather-night-partly-cloudy") %}
+            mdi:weather-sunny
+          {% elif is_state("sensor.skynet_forecast_1_icon", "weather-lightning-rainy") %}
+            mdi:weather-lightning-rainy
+          {% else %}
+            error
+          {% endif %}
+
+      forecast_2:
+        friendly_name: 'Second'
+        value_template: >          
+          {{states.sensor.skynet_forecast_2_high.state}}°/{{states.sensor.skynet_forecast_2_low.state}}°/{{states.sensor.skynet_forecast_2_percipitation.state}}%
+        icon_template: >-
+          {% if is_state("sensor.skynet_forecast_2_icon", "weather-sunny") %}
+            mdi:weather-sunny
+          {% elif is_state("sensor.skynet_forecast_2_icon", "weather-night") %}
+            mdi:weather-night
+          {% elif is_state("sensor.skynet_forecast_2_icon", "weather-cloudy") %}
+            mdi:weather-cloudy
+          {% elif is_state("sensor.skynet_forecast_2_icon", "weather-pouring") %}
+            mdi:weather-pouring
+          {% elif is_state("sensor.skynet_forecast_2_icon", "weather-snowy-rainy") %}
+            mdi:weather-snowy-rainy
+          {% elif is_state("sensor.skynet_forecast_2_icon", "weather-snowy") %}
+            mdi:weather-snowy
+          {% elif is_state("sensor.skynet_forecast_2_icon", "weather-windy") %}
+            mdi:weather-windy
+          {% elif is_state("sensor.skynet_forecast_2_icon", "weather-fog") %}
+            mdi:weather-fog
+          {% elif is_state("sensor.skynet_forecast_2_icon", "weather-partly-cloudy") %}
+            mdi:weather-partly-cloudy
+          {% elif is_state("sensor.skynet_forecast_2_icon", "weather-night-partly-cloudy") %}
+            mdi:weather-sunny
+          {% elif is_state("sensor.skynet_forecast_2_icon", "weather-lightning-rainy") %}
+            mdi:weather-lightning-rainy
+          {% else %}
+            error
+          {% endif %}
+
+      forecast_3:
+        friendly_name: 'Third'
+        value_template: >          
+          {{states.sensor.skynet_forecast_3_high.state}}°/{{states.sensor.skynet_forecast_3_low.state}}°/{{states.sensor.skynet_forecast_3_percipitation.state}}%
+        icon_template: >-
+          {% if is_state("sensor.skynet_forecast_3_icon", "weather-sunny") %}
+            mdi:weather-sunny
+          {% elif is_state("sensor.skynet_forecast_3_icon", "weather-night") %}
+            mdi:weather-night
+          {% elif is_state("sensor.skynet_forecast_3_icon", "weather-cloudy") %}
+            mdi:weather-cloudy
+          {% elif is_state("sensor.skynet_forecast_3_icon", "weather-pouring") %}
+            mdi:weather-pouring
+          {% elif is_state("sensor.skynet_forecast_3_icon", "weather-snowy-rainy") %}
+            mdi:weather-snowy-rainy
+          {% elif is_state("sensor.skynet_forecast_3_icon", "weather-snowy") %}
+            mdi:weather-snowy
+          {% elif is_state("sensor.skynet_forecast_3_icon", "weather-windy") %}
+            mdi:weather-windy
+          {% elif is_state("sensor.skynet_forecast_3_icon", "weather-fog") %}
+            mdi:weather-fog
+          {% elif is_state("sensor.skynet_forecast_3_icon", "weather-partly-cloudy") %}
+            mdi:weather-partly-cloudy
+          {% elif is_state("sensor.skynet_forecast_3_icon", "weather-night-partly-cloudy") %}
+            mdi:weather-sunny
+          {% elif is_state("sensor.skynet_forecast_3_icon", "weather-lightning-rainy") %}
+            mdi:weather-lightning-rainy
+          {% else %}
+            error
+          {% endif %}
+
+      forecast_4:
+        friendly_name: 'Fourth'
+        value_template: >          
+          {{states.sensor.skynet_forecast_4_high.state}}°/{{states.sensor.skynet_forecast_4_low.state}}°/{{states.sensor.skynet_forecast_4_percipitation.state}}%
+        icon_template: >-
+          {% if is_state("sensor.skynet_forecast_4_icon", "weather-sunny") %}
+            mdi:weather-sunny
+          {% elif is_state("sensor.skynet_forecast_4_icon", "weather-night") %}
+            mdi:weather-night
+          {% elif is_state("sensor.skynet_forecast_4_icon", "weather-cloudy") %}
+            mdi:weather-cloudy
+          {% elif is_state("sensor.skynet_forecast_4_icon", "weather-pouring") %}
+            mdi:weather-pouring
+          {% elif is_state("sensor.skynet_forecast_4_icon", "weather-snowy-rainy") %}
+            mdi:weather-snowy-rainy
+          {% elif is_state("sensor.skynet_forecast_4_icon", "weather-snowy") %}
+            mdi:weather-snowy
+          {% elif is_state("sensor.skynet_forecast_4_icon", "weather-windy") %}
+            mdi:weather-windy
+          {% elif is_state("sensor.skynet_forecast_4_icon", "weather-fog") %}
+            mdi:weather-fog
+          {% elif is_state("sensor.skynet_forecast_4_icon", "weather-partly-cloudy") %}
+            mdi:weather-partly-cloudy
+          {% elif is_state("sensor.skynet_forecast_4_icon", "weather-night-partly-cloudy") %}
+            mdi:weather-sunny
+          {% elif is_state("sensor.skynet_forecast_4_icon", "weather-lightning-rainy") %}
+            mdi:weather-lightning-rainy
+          {% else %}
+            error
+          {% endif %}
+
+      forecast_5:
+        friendly_name: 'Fifth'
+        value_template: >          
+          {{states.sensor.skynet_forecast_5_high.state}}°/{{states.sensor.skynet_forecast_5_low.state}}°/{{states.sensor.skynet_forecast_5_percipitation.state}}%
+        icon_template: >-
+          {% if is_state("sensor.skynet_forecast_5_icon", "weather-sunny") %}
+            mdi:weather-sunny
+          {% elif is_state("sensor.skynet_forecast_5_icon", "weather-night") %}
+            mdi:weather-night
+          {% elif is_state("sensor.skynet_forecast_5_icon", "weather-cloudy") %}
+            mdi:weather-cloudy
+          {% elif is_state("sensor.skynet_forecast_5_icon", "weather-pouring") %}
+            mdi:weather-pouring
+          {% elif is_state("sensor.skynet_forecast_5_icon", "weather-snowy-rainy") %}
+            mdi:weather-snowy-rainy
+          {% elif is_state("sensor.skynet_forecast_5_icon", "weather-snowy") %}
+            mdi:weather-snowy
+          {% elif is_state("sensor.skynet_forecast_5_icon", "weather-windy") %}
+            mdi:weather-windy
+          {% elif is_state("sensor.skynet_forecast_5_icon", "weather-fog") %}
+            mdi:weather-fog
+          {% elif is_state("sensor.skynet_forecast_5_icon", "weather-partly-cloudy") %}
+            mdi:weather-partly-cloudy
+          {% elif is_state("sensor.skynet_forecast_5_icon", "weather-night-partly-cloudy") %}
+            mdi:weather-sunny
+          {% elif is_state("sensor.skynet_forecast_5_icon", "weather-lightning-rainy") %}
+            mdi:weather-lightning-rainy
+          {% else %}
+            error
+          {% endif %}
+
+      forecast_6:
+        friendly_name: 'Sixth'
+        value_template: >          
+          {{states.sensor.skynet_forecast_6_high.state}}°/{{states.sensor.skynet_forecast_6_low.state}}°/{{states.sensor.skynet_forecast_6_percipitation.state}}%
+        icon_template: >-
+          {% if is_state("sensor.skynet_forecast_6_icon", "weather-sunny") %}
+            mdi:weather-sunny
+          {% elif is_state("sensor.skynet_forecast_6_icon", "weather-night") %}
+            mdi:weather-night
+          {% elif is_state("sensor.skynet_forecast_6_icon", "weather-cloudy") %}
+            mdi:weather-cloudy
+          {% elif is_state("sensor.skynet_forecast_6_icon", "weather-pouring") %}
+            mdi:weather-pouring
+          {% elif is_state("sensor.skynet_forecast_6_icon", "weather-snowy-rainy") %}
+            mdi:weather-snowy-rainy
+          {% elif is_state("sensor.skynet_forecast_6_icon", "weather-snowy") %}
+            mdi:weather-snowy
+          {% elif is_state("sensor.skynet_forecast_6_icon", "weather-windy") %}
+            mdi:weather-windy
+          {% elif is_state("sensor.skynet_forecast_6_icon", "weather-fog") %}
+            mdi:weather-fog
+          {% elif is_state("sensor.skynet_forecast_6_icon", "weather-partly-cloudy") %}
+            mdi:weather-partly-cloudy
+          {% elif is_state("sensor.skynet_forecast_6_icon", "weather-night-partly-cloudy") %}
+            mdi:weather-sunny
+          {% elif is_state("sensor.skynet_forecast_6_icon", "weather-lightning-rainy") %}
+            mdi:weather-lightning-rainy
+          {% else %}
+            error
+          {% endif %}
