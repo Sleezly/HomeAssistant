@@ -91,12 +91,6 @@ mqtt_statestream:
   publish_attributes: false
   publish_timestamps: false
 
-panel_iframe:
-  pihole:
-    title: Pi-Hole
-    icon: mdi:pi-box
-    url: http://192.168.1.2:4865/admin/index.php
-
 nest:
   client_id: !secret nest_client_id
   client_secret: !secret nest_client_secret
@@ -107,7 +101,6 @@ hue:
       filename: phue-0017882bca40.conf
     - host: 192.168.1.18
       filename: phue-0017886e5a54.conf
-
 
 notify:
   - name: My PushBullet
