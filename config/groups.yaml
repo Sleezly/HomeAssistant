@@ -128,6 +128,7 @@
     icon: mdi:settings
     entities:
       - script.home_assistant_restart
+      - script.pc_audio_to_aux
   
   weather_card_forecast:
     name: Weekly Forecast

@@ -263,6 +263,12 @@ pair_pc_to_kitchen:
       entity_id: media_player.kitchen
       volume_level: 0.35
 
+# Set PC Audio to AUX
+pc_audio_to_aux:
+  alias: "Fix PC Audio"
+  sequence:
+  - service: rest_command.pc_source_select_aux
+
 # Restart Home Assistant
 home_assistant_restart:
   alias: Restart
