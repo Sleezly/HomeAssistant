@@ -13,7 +13,9 @@
       entity_id: switch.yi_camera_smart_plug
     - service: automation.turn_on
       entity_id: automation.auto41
-      
+    - service: switch.turn_on
+      entity_id: switch.christmas_tree
+
 # Actions for home exit
 - id: auto2
   alias: Actions When Leaving Home
@@ -29,6 +31,8 @@
       entity_id: switch.yi_camera_smart_plug
     - service: automation.turn_off
       entity_id: automation.auto41
+    - service: switch.turn_off
+      entity_id: switch.christmas_tree
 
 # Hallway sensor intruder alert
 - id: auto3
@@ -312,3 +316,39 @@
     data:
       entity_id: input_text.rfid_uid_last
       value: None
+
+# Garage Door Button
+- id: auto88
+  alias: Garage Button Pressed
+  initial_state: true
+  hide_entity: false
+  trigger:
+  - entity_id: sensor.garage_button
+    platform: state
+  action:
+    - service: script.turn_on
+      entity_id: script.garage_button 
+
+#- id: auto98
+#  alias: Turn On  Christmas Tree
+#  description: ''
+#  trigger:
+#  - entity_id: sensor.switch_downstairs
+#    platform: state
+#    to: '1_click_up'
+#  condition: []
+#  action:
+#  - service: switch.turn_on
+#    entity_id: switch.christmas_tree
+
+#- id: auto99
+#  alias: Turn Off Christmas Tree
+#  description: ''
+#  trigger:
+#  - entity_id: sensor.switch_downstairs
+#    platform: state
+#    to: '4_click_up'
+#  condition: []
+#  action:
+#  - service: switch.turn_off
+#    entity_id: switch.christmas_tree

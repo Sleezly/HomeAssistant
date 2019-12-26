@@ -210,7 +210,7 @@ play_everywhere:
       {% if is_state("media_player.theater", "off") %} true
       {% elif is_state("media_player.theater", "paused") %} true
       {% else %} false {% endif %}
-  - service: media_player.soundtouch_play_everywhere
+  - service: soundtouch.play_everywhere
     data:
       master: media_player.kitchen
   - service: media_player.volume_set
@@ -222,7 +222,7 @@ play_everywhere:
 play_everywhere_always:
   alias: 'Pair All to Kitchen'
   sequence:
-  - service: media_player.soundtouch_play_everywhere
+  - service: soundtouch.play_everywhere
     data:
       master: media_player.kitchen
   - service: media_player.volume_set
@@ -238,7 +238,7 @@ play_everywhere_always:
 play_everywhere_pc:
   alias: 'Pair All to PC'
   sequence:
-  - service: media_player.soundtouch_play_everywhere
+  - service: soundtouch.play_everywhere
     data:
       master: media_player.pc
   - service: media_player.volume_set
@@ -283,3 +283,11 @@ home_assistant_restart:
 #    data:
 #      entity_id: media_player.spotify
 #      source: Kitchen
+
+garage_button:
+  alias: "Garage Button"
+  sequence:
+  - service: mqtt.publish
+    data_template:
+      topic: home/garage/set
+      payload: ''

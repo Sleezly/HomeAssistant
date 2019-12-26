@@ -90,8 +90,12 @@
       - switch.guest
       - switch.yi_camera_smart_plug
       - switch.christmas_tree
+      - switch.nightlight_anna
       - switch.door_alarms
       - sensor.pantry_door
+      - sensor.garage_door
+      - script.garage_button
+      - sensor.garage_button
       - light.outside_lights
 
   rfid_view:

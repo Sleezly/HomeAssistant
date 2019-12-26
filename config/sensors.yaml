@@ -1,10 +1,9 @@
   - platform: time_date
     display_options:
       - 'date_time'
-
-  - platform: pi_hole
-    host: localhost:4865
     
+  #- platform: huesensor
+
   - platform: rest
     resource: !secret hue_sensor_presence_anybody
     value_template: '{{ value_json.state.presence }}'
@@ -82,12 +81,23 @@
     unit_of_measurement: 'BYTE'
     name: 'Flux Brightness'
 
+  - platform: rest
+    resource: !secret hue_button_garage
+    value_template: '{{ value_json.state.lastupdated }}'
+    scan_interval: 2
+    name: 'Garage Button'
+
 # Contact Sensors
   - platform: mqtt
     name: 'Pantry Door'
     state_topic: "home/pantry"
     value_template: '{{ value_json.Door }}'
     
+  - platform: mqtt
+    name: 'Garage Door'
+    state_topic: "home/garage"
+    value_template: '{{ value_json.Door }}'
+
 # SkyNet Current Conditions
   - platform: rest
     resource: !secret skynet_controller

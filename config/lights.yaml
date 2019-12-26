@@ -1,20 +1,20 @@
   - platform: group
     name: Accent Lights
     entities:
-      - light.tv
-      - light.mantle
-      - light.kitchen_strip_microwave
-      - light.kitchen_strip_oven
-      - light.kitchen_strip_coffee
-      - light.kitchen_strip_dishwasher
-      
+      - light.tv_accent_bias
+      - light.tv_accent_mantle
+      - light.kitchen_accent_coffee
+      - light.kitchen_accent_dishwasher
+      - light.kitchen_accent_microwave
+      - light.kitchen_accent_oven
+
   - platform: group
     name: Theater Lights
     entities:
       - light.theater_lamp_1
       - light.theater_lamp_2
-      - light.tv
-      - light.mantle
+      - light.tv_accent_bias
+      - light.tv_accent_mantle
 
   - platform: group
     name: Washroom Downlights
@@ -40,10 +40,10 @@
   - platform: group
     name: Kitchen Lightstrips
     entities:
-      - light.kitchen_strip_microwave
-      - light.kitchen_strip_oven
-      - light.kitchen_strip_coffee
-      - light.kitchen_strip_dishwasher
+      - light.kitchen_accent_coffee
+      - light.kitchen_accent_dishwasher
+      - light.kitchen_accent_microwave
+      - light.kitchen_accent_oven
       
   - platform: group
     name: Kitchen Lights
@@ -53,25 +53,25 @@
       - light.kitchen_ceiling_2
       - light.kitchen_ceiling_3
       - light.kitchen_ceiling_4
-      - light.kitchen_strip_microwave
-      - light.kitchen_strip_oven
-      - light.kitchen_strip_coffee
-      - light.kitchen_strip_dishwasher
-      
+      - light.kitchen_accent_coffee
+      - light.kitchen_accent_dishwasher
+      - light.kitchen_accent_microwave
+      - light.kitchen_accent_oven
+
   - platform: group
     name: Entry Lights
     entities:
       - light.entry_1
       - light.entry_2
       - light.entry_3
-     
+
   - platform: group
     name: Downstairs Lights
     entities:
       - light.theater_lamp_1
       - light.theater_lamp_2
-      - light.tv
-      - light.mantle
+      - light.tv_accent_bias
+      - light.tv_accent_mantle
       - light.entry_1
       - light.entry_2
       - light.entry_3
@@ -80,10 +80,10 @@
       - light.kitchen_ceiling_2
       - light.kitchen_ceiling_3
       - light.kitchen_ceiling_4
-      - light.kitchen_strip_microwave
-      - light.kitchen_strip_oven
-      - light.kitchen_strip_coffee
-      - light.kitchen_strip_dishwasher
+      - light.kitchen_accent_coffee
+      - light.kitchen_accent_dishwasher
+      - light.kitchen_accent_microwave
+      - light.kitchen_accent_oven
       - light.office_1
       - light.office_2
       - light.office_3
@@ -113,7 +113,7 @@
       - light.bedroom_master_lamp
       - light.bedroom_master_lightstrip
       - light.go
-      
+
   - platform: group
     name: Bedroom Anna
     entities:
@@ -121,7 +121,7 @@
       - light.bedroom_anna_ceiling_2
       - light.bedroom_anna_closet
       - light.bedroom_anna_lamp
-      
+
   - platform: group
     name: Bedroom James
     entities:
