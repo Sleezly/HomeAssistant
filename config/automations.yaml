@@ -10,7 +10,7 @@
     to: 'True'
   action:
     - service: switch.turn_off
-      entity_id: switch.yi_camera_smart_plug
+      entity_id: switch.yi_home_outlet
     - service: automation.turn_on
       entity_id: automation.auto41
     - service: switch.turn_on
@@ -28,7 +28,7 @@
     to: 'False'
   action:
     - service: switch.turn_on
-      entity_id: switch.yi_camera_smart_plug
+      entity_id: switch.yi_home_outlet
     - service: automation.turn_off
       entity_id: automation.auto41
     - service: switch.turn_off
@@ -168,7 +168,12 @@
   - entity_id: sensor.outside_lightlevel
     platform: state
   action:
-    - service: rest_command.flux_lightlevel_set
+    - service: mqtt.publish
+      data_template:
+        topic: home/flux/lightlevel
+        retain: true
+        payload_template: "{{ states('sensor.outside_lightlevel') }}"
+#    - service: rest_command.flux_lightlevel_set
 
 #  condition: 
 #    condition: state
@@ -317,17 +322,34 @@
       entity_id: input_text.rfid_uid_last
       value: None
 
-# Garage Door Button
+# Garage Door Opener Button
 - id: auto88
   alias: Garage Button Pressed
   initial_state: true
   hide_entity: false
   trigger:
-  - entity_id: sensor.garage_button
+  - entity_id: sensor.garage_opener
     platform: state
   action:
     - service: script.turn_on
-      entity_id: script.garage_button 
+      entity_id: script.garage_opener 
+
+- id: auto89
+  alias: Garage Door Nighly Status
+  initial_state: true
+  trigger:
+  - platform: time
+    at: "21:30:00"
+  action:
+    service: notify.tv
+    data_template:
+      message: >
+        {% if is_state('sensor.garage_door', 'Opened') %} 
+          Oh no! The garage door is still open!
+        {% else %} 
+          Nice! The garage door is closed.
+        {% endif %}
+#        'Garage door is {{'sensor.garage_door'}}.'
 
 #- id: auto98
 #  alias: Turn On  Christmas Tree

@@ -23,7 +23,7 @@
 #      - media_player.tv
 
   downstairs_lights_view:
-    name: Downstairs Lights
+    name: Lights
     view: yes
     icon: mdi:lightbulb-on
     entities:
@@ -34,11 +34,47 @@
       - light.dining_lights
       - light.office_lights
       - light.entry_lights
-      
+      - light.bedroom_hallway
+      - light.master_lights
+      - light.bedroom_anna
+      - light.bedroom_james
+      - light.bedroom_nathan
+      - light.bathroom
+      - light.outside_lights
+
+  flux_view:
+    view: yes
+    name: Flux
+    icon: mdi:home-automation
+    entities:
+      - sensor.outside_temp
+      - sensor.hallway_temp
+      - sensor.outside_lightlevel
+      - sensor.flux_temperature
+      - sensor.flux_brightness
+      - switch.flux
+
+  seensors_view:
+    view: yes
+    name: Sensors
+    icon: mdi:shield-home
+    entities:
+      - sensor.anyone_home
+      - sensor.wife_home
+      - sensor.me_home
+      - switch.guest
+      - switch.yi_home_outlet
+      - switch.christmas_tree
+      - switch.annas_nightlight
+      - switch.door_alarms
+      - sensor.pantry_door
+      - sensor.garage_door
+      - script.garage_opener
+
   music_view:
     name: Music
     view: yes
-    icon: mdi:music-box
+    icon: mdi:music
     entities:
       - script.play_meghan_trainor
       - script.play_chris_issak
@@ -50,81 +86,34 @@
       - script.play_josh_turner
       - script.play_jack_johnson
       - script.play_jo_jo_siwa
-      
-  bedroom_lights_view:
-    name: Bedroom Lights
-    view: yes
-    icon: mdi:bed-empty
-    entities:
-      - light.bedroom_hallway
-      - light.master_lights
-      - light.bedroom_anna
-      - light.bedroom_james
-      - light.bedroom_nathan
-      - light.bathroom
-  
-  sensors_view:
-    view: yes
-    name: Sensors
-    icon: mdi:home-automation
-    entities:
-      - sensor.outside_temp
-      - sensor.hallway_temp
-      - sensor.outside_lightlevel
-      - sensor.flux
-      - sensor.flux_brightness
-      - switch.flux
-      - sensor.garage_motion
-      - sensor.hallway_motion
-      - sensor.patio_motion
-#      - sensor.daylight
-      
-  security_view:
-    view: yes
-    name: Security
-    icon: mdi:shield-home
-    entities:
-      - sensor.anyone_home
-      - sensor.wife_home
-      - sensor.me_home
-      - switch.guest
-      - switch.yi_camera_smart_plug
-      - switch.christmas_tree
-      - switch.nightlight_anna
-      - switch.door_alarms
-      - sensor.pantry_door
-      - sensor.garage_door
-      - script.garage_button
-      - sensor.garage_button
-      - light.outside_lights
 
-  rfid_view:
-    view: yes
-    name: RFID
-    icon: mdi:nfc-tap
-    entities:
-      - input_text.rfid_uid
-      - input_text.rfid_uid_last
-      - media_player.spotify
-      - media_player.kitchen
-      - media_player.theater
-      - media_player.tv
+#  rfid_view:
+#    view: yes
+#    name: RFID
+#    icon: mdi:nfc-tap
+#    entities:
+#      - input_text.rfid_uid
+#      - input_text.rfid_uid_last
+#      - media_player.spotify
+#      - media_player.kitchen
+#      - media_player.theater
+#      - media_player.tv
 
-  scripts_view:
-    view: yes
-    name: All Scripts
-    icon: mdi:flash
-    control: hidden
-    entities:
-      - group.all_scripts
+#  scripts_view:
+#    view: yes
+#    name: All Scripts
+#    icon: mdi:flash
+#    control: hidden
+#    entities:
+#      - group.all_scripts
       
-  automations_view:
-    view: yes
-    name: All Automations
-    icon: mdi:flash-auto
-    control: hidden
-    entities: 
-      - group.all_automations
+#  automations_view:
+#    view: yes
+#    name: All Automations
+#    icon: mdi:flash-auto
+#    control: hidden
+#    entities: 
+#      - group.all_automations
 
   settings:
     view: yes

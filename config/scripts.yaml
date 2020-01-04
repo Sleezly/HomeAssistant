@@ -284,8 +284,8 @@ home_assistant_restart:
 #      entity_id: media_player.spotify
 #      source: Kitchen
 
-garage_button:
-  alias: "Garage Button"
+garage_opener:
+  alias: "Garage Opener"
   sequence:
   - service: mqtt.publish
     data_template:

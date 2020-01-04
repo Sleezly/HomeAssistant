@@ -120,14 +120,21 @@ tplink:
   discovery: true
     
 switch:
-  - platform: rest
-    resource: !secret flux_controller
-    name: Flux
-    method: post
-    body_on: '{"On": "on", "LightLevel": {{states.sensor.outside_lightlevel.state}}}'
-    body_off: '{"On": "off", "LightLevel": {{states.sensor.outside_lightlevel.state}}}'
-    is_on_template: '{{value_json.On}}'
-    
+  - platform: mqtt
+    name: "Flux"
+    command_topic: "home/flux/set"
+    payload_on: 'true'
+    payload_off: 'false'
+    retain: true
+
+#  - platform: rest
+#    resource: !secret flux_controller
+#    name: Flux
+#    method: post
+#    body_on: '{"On": "on", "LightLevel": {{states.sensor.outside_lightlevel.state}}}'
+#    body_off: '{"On": "off", "LightLevel": {{states.sensor.outside_lightlevel.state}}}'
+#    is_on_template: '{{value_json.On}}'
+
   - platform: rest
     resource: !secret hue_sensor_presence_guest
     name: Guest

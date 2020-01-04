@@ -66,26 +66,39 @@
 #    value_template: '{{ value_json.state.daylight }}'
 #    scan_interval: 120
 #    name: 'Daylight'
-    
-  - platform: rest
-    resource: !secret flux_controller
-    value_template: '{{ value_json.LastColorTemperature }}'
-    scan_interval: 60
-    unit_of_measurement: '°K'
-    name: 'Flux'
 
-  - platform: rest
-    resource: !secret flux_controller
-    value_template: '{{ value_json.LastBrightness }}'
-    scan_interval: 60
-    unit_of_measurement: 'BYTE'
+# Flux
+  - platform: mqtt
+    name: 'Flux Temperature'
+    unit_of_measurement: '°K'
+    state_topic: "home/flux/status"
+    value_template: '{{ value_json.ColorTemperature }}'
+
+  - platform: mqtt
     name: 'Flux Brightness'
+    unit_of_measurement: 'BYTE'
+    state_topic: "home/flux/status"
+    value_template: '{{ value_json.Brightness }}'
+
+#  - platform: rest
+#    resource: !secret flux_controller
+#    value_template: '{{ value_json.LastColorTemperature }}'
+#    scan_interval: 60
+#    unit_of_measurement: '°K'
+#    name: 'Flux'
+
+#  - platform: rest
+#    resource: !secret flux_controller
+#    value_template: '{{ value_json.LastBrightness }}'
+#    scan_interval: 60
+#    unit_of_measurement: 'BYTE'
+#    name: 'Flux Brightness'
 
   - platform: rest
     resource: !secret hue_button_garage
     value_template: '{{ value_json.state.lastupdated }}'
     scan_interval: 2
-    name: 'Garage Button'
+    name: 'Garage Opener'
 
 # Contact Sensors
   - platform: mqtt
