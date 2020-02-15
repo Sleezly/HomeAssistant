@@ -47,7 +47,7 @@
   - platform: group
     name: Kitchen Lights
     entities:
-      - light.kitchen_sink
+      - light.kitchen_ceiling_sink
       - light.kitchen_ceiling_1
       - light.kitchen_ceiling_2
       - light.kitchen_ceiling_3
@@ -74,7 +74,7 @@
       - light.entry_1
       - light.entry_2
       - light.entry_3
-      - light.kitchen_sink
+      - light.kitchen_ceiling_sink
       - light.kitchen_ceiling_1
       - light.kitchen_ceiling_2
       - light.kitchen_ceiling_3

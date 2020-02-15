@@ -2,7 +2,6 @@
 - id: auto1
   alias: Actions When Arriving Home
   initial_state: true
-  hide_entity: false
   trigger:
   - entity_id: sensor.anyone_home
     from: 'False'
@@ -20,7 +19,6 @@
 - id: auto2
   alias: Actions When Leaving Home
   initial_state: true
-  hide_entity: false
   trigger:
   - entity_id: sensor.anyone_home
     from: 'True'
@@ -38,7 +36,6 @@
 - id: auto3
   alias: Intruder Alert Hallway
   initial_state: true
-  hide_entity: false
   trigger:
   - entity_id: sensor.hallway_motion
     from: '0'
@@ -62,7 +59,6 @@
 - id: auto4
   alias: Intruder Alert Garage
   initial_state: true
-  hide_entity: false
   trigger:
   - entity_id: sensor.garage_motion
     from: '0'
@@ -86,7 +82,6 @@
 - id: auto41
   alias: Motion Alert Garage
   initial_state: true
-  hide_entity: false
   trigger:
   - entity_id: sensor.garage_motion
     from: '0'
@@ -113,7 +108,6 @@
 - id: auto5
   alias: Intruder Alert Patio
   initial_state: true
-  hide_entity: false
   trigger:
   - entity_id: sensor.patio_motion
     from: '0'
@@ -137,7 +131,6 @@
 - id: auto6
   alias: Motion Alert Hallway at Night
   initial_state: true
-  hide_entity: false
   trigger:
   - entity_id: sensor.hallway_motion
     from: '0'
@@ -163,7 +156,6 @@
 - id: flux_lightlevel
   alias: Flux Lightlevel
   initial_state: true
-  hide_entity: false
   trigger:
   - entity_id: sensor.outside_lightlevel
     platform: state
@@ -201,6 +193,18 @@
 #  - service: media_player.soundtouch_play_everywhere
 #    data:
 #      master: media_player.kitchen
+
+- id: soundbar_speaker_source
+  alias: "Soundbar Set Source"
+  initial_state: true
+  trigger:
+  - entity_id: media_player.tv 
+    platform: state
+    to: 'on'
+  action:
+  - service: media_player.turn_on
+    entity_id: media_player.theater
+  - service: rest_command.theater_source_select_aux
 
 - id: pc_speaker_keep_alive
   alias: "PC Set Source"
@@ -325,14 +329,25 @@
 # Garage Door Opener Button
 - id: auto88
   alias: Garage Button Pressed
-  initial_state: true
-  hide_entity: false
+  initial_state: false
   trigger:
   - entity_id: sensor.garage_opener
     platform: state
   action:
     - service: script.turn_on
-      entity_id: script.garage_opener 
+      entity_id: script.garage_opener
+
+- id: ios_widgit_garage_door
+  alias: "Garage Door Widgit"
+  initial_state: true
+  trigger:
+  - platform: event
+    event_type: ios.action_fired
+    event_data:
+      actionName: 'garage_door'
+  action:
+    service: script.turn_on
+    entity_id: script.garage_opener
 
 - id: auto89
   alias: Garage Door Nighly Status
@@ -350,6 +365,27 @@
           Nice! The garage door is closed.
         {% endif %}
 #        'Garage door is {{'sensor.garage_door'}}.'
+
+- id: auto90
+  alias: Garage Alert
+  initial_state: true
+  trigger:
+  - platform: state
+    entity_id: sensor.garage_door
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: sensor.garage_door
+      state: 'Opened'
+    - condition: state
+      entity_id: sensor.anyone_home
+      state: 'False'
+  action:
+    service: notify.my_pushbullet
+    data_template:
+      title: "Alert: Garage Door"
+      message: "Garage door opened when nobody is home!"
 
 #- id: auto98
 #  alias: Turn On  Christmas Tree

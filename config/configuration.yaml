@@ -102,9 +102,11 @@ nest:
 hue:
   bridges:
     - host: 192.168.1.49
-      filename: phue-0017882bca40.conf
     - host: 192.168.1.18
-      filename: phue-0017886e5a54.conf
+
+webostv:
+  host: 192.168.1.13
+  name: TV
 
 notify:
   - name: My PushBullet
@@ -168,6 +170,13 @@ switch:
 #    device_class: garage
 
 rest_command:
+  theater_source_select_aux:
+    url: !secret bose_soundbar
+    method: POST
+    headers:
+      content-type: application/xml
+    payload: '<ContentItem source="PRODUCT" sourceAccount="TV">TV</ContentItem>'
+
   pc_source_select_aux:
     url: !secret soundtouch_wireless_link
     method: POST
@@ -258,10 +267,6 @@ weblink:
       icon: mdi:onedrive
 
 media_player:
-  - platform: webostv
-    host: 192.168.1.13
-    name: TV
-    filename: webostv.conf
   - platform: spotify
     client_id: !secret spotify_client_id
     client_secret: !secret spotify_client_secret

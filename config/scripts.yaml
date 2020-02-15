@@ -254,7 +254,7 @@ play_everywhere_pc:
 pair_pc_to_kitchen:
   alias: 'Pair PC to Kitchen'
   sequence:
-  - service: media_player.soundtouch_create_zone
+  - service: soundtouch.create_zone
     data:
       master: media_player.kitchen
       slaves: media_player.pc
@@ -268,6 +268,15 @@ pc_audio_to_aux:
   alias: "Fix PC Audio"
   sequence:
   - service: rest_command.pc_source_select_aux
+
+# Set Bose Soundbar Audio to TV
+soundbar_audio_to_tv:
+  alias: "Fix Soundbar"
+  sequence:
+  - service: media_player.turn_on
+    entity_id: media_player.theater
+  - delay: '00:00:01'
+  - service: rest_command.theater_source_select_aux
 
 # Restart Home Assistant
 home_assistant_restart:

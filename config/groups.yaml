@@ -19,7 +19,6 @@
       - media_player.kitchen
       - media_player.theater
       - media_player.pc
-#      - weblink.photos
 #      - media_player.tv
 
   downstairs_lights_view:
@@ -59,6 +58,9 @@
     name: Sensors
     icon: mdi:shield-home
     entities:
+      - script.garage_opener
+      - sensor.garage_door
+      - sensor.pantry_door
       - sensor.anyone_home
       - sensor.wife_home
       - sensor.me_home
@@ -67,9 +69,6 @@
       - switch.christmas_tree
       - switch.annas_nightlight
       - switch.door_alarms
-      - sensor.pantry_door
-      - sensor.garage_door
-      - script.garage_opener
 
   music_view:
     name: Music
@@ -122,6 +121,7 @@
     entities:
       - script.home_assistant_restart
       - script.pc_audio_to_aux
+      - script.soundbar_audio_to_tv
   
   weather_card_forecast:
     name: Weekly Forecast
