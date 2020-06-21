@@ -1,15 +1,24 @@
   default_view:
-    view: yes
     name: Home Sweet Home
     icon: mdi:home
     entities:
-      - group.weather_card_forecast
+      - sensor.date_time
+      - sensor.forecast_today
+      - sensor.forecast_1
+      - sensor.forecast_2
+      - sensor.forecast_3
+      - sensor.forecast_4
+      - sensor.forecast_5
+      - sensor.forecast_6
+      - sensor.temperature
+      - sensor.forecast_summary
       - climate.hallway_nest
-      - group.scene_card
-      
+      - script.hue_relax
+      - script.hue_dinner
+      - script.hue_tv
+
   media_view:
     name: Media
-    view: yes
     icon: mdi:play
     entities:
       - script.play_everywhere_always
@@ -23,10 +32,9 @@
 
   downstairs_lights_view:
     name: Lights
-    view: yes
     icon: mdi:lightbulb-on
     entities:
-      - light.downstairs_lights
+      - light.downstairs
       - light.accent_lights
       - light.theater_lights
       - light.kitchen_lights
@@ -42,7 +50,6 @@
       - light.outside_lights
 
   flux_view:
-    view: yes
     name: Flux
     icon: mdi:home-automation
     entities:
@@ -54,7 +61,6 @@
       - switch.flux
 
   seensors_view:
-    view: yes
     name: Sensors
     icon: mdi:shield-home
     entities:
@@ -65,14 +71,20 @@
       - sensor.wife_home
       - sensor.me_home
       - switch.guest
+      - cover.all_blinds
+      - cover.downstairs_blinds
+      - cover.kitchen_nook_blind_east
+      - cover.kitchen_nook_blind_west
+      - cover.james_blinds
+      - cover.blind_nathan
       - switch.yi_home_outlet
       - switch.christmas_tree
       - switch.annas_nightlight
       - switch.door_alarms
+      - switch.adguard
 
   music_view:
     name: Music
-    view: yes
     icon: mdi:music
     entities:
       - script.play_meghan_trainor
@@ -87,7 +99,6 @@
       - script.play_jo_jo_siwa
 
 #  rfid_view:
-#    view: yes
 #    name: RFID
 #    icon: mdi:nfc-tap
 #    entities:
@@ -99,51 +110,21 @@
 #      - media_player.tv
 
 #  scripts_view:
-#    view: yes
 #    name: All Scripts
 #    icon: mdi:flash
-#    control: hidden
 #    entities:
 #      - group.all_scripts
       
 #  automations_view:
-#    view: yes
 #    name: All Automations
 #    icon: mdi:flash-auto
-#    control: hidden
 #    entities: 
 #      - group.all_automations
 
   settings:
-    view: yes
     name: Settings
     icon: mdi:settings
     entities:
       - script.home_assistant_restart
       - script.pc_audio_to_aux
-      - script.soundbar_audio_to_tv
-  
-  weather_card_forecast:
-    name: Weekly Forecast
-    view: no
-    control: hidden
-    entities:
-      - sensor.date_time
-      - sensor.forecast_today
-      - sensor.forecast_1
-      - sensor.forecast_2
-      - sensor.forecast_3
-      - sensor.forecast_4
-      - sensor.forecast_5
-      - sensor.forecast_6
-      - sensor.temperature
-      - sensor.forecast_summary
-  
-  scene_card:
-    name: Scenes
-    view: no
-    control: hidden
-    entities:
-      - script.hue_relax
-      - script.hue_dinner
-      - script.hue_tv
+      - script.execute_fix_soundbar

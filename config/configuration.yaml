@@ -23,12 +23,27 @@ homeassistant:
   # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: 32
 
+logger:
+  default: critical
+  logs:
+    custom_components.circadian_lighting: debug
+
 mobile_app:
 
-#http:
-#  base_url: https://leslietrowbridge.com:8123
-#  ssl_certificate: /ssl/fullchain.pem
-#  ssl_key: /ssl/privkey.pem
+sun:
+
+weather:
+  - platform: darksky
+    api_key: e6b3eee2b6968b36e92eb2b1a7d0a33a
+    mode: daily
+
+circadian_lighting:
+  max_colortemp: 5000
+  min_colortemp: 2000
+
+http:
+  ssl_certificate: /ssl/fullchain.pem
+  ssl_key: /ssl/privkey.pem
 
 # Python script for Weather
 python_script:
@@ -38,6 +53,7 @@ python_script:
 
 # Enables the frontend
 frontend:
+  themes: !include themes.yaml
 
 # Enables configuration UI
 config:
@@ -53,11 +69,6 @@ updater:
 
 # Discover some devices automatically
 discovery:
-  ignore:
-    - igd
-
-# Allows you to issue voice commands from the frontend in enabled browsers
-conversation:
 
 # Enables support for tracking state changes over time
 history:
@@ -66,17 +77,6 @@ history:
 logbook:
 
 system_health:
-
-# Enables a map showing the location of tracked devices
-#map:
-
-# Track the sun
-#sun:
-
-# Text to speech
-tts:
-  - platform: google_translate
-    service_name: google_say
 
 # MQTT
 mqtt:
@@ -88,12 +88,6 @@ mqtt_statestream:
   base_topic: homeassistant
   publish_attributes: false
   publish_timestamps: false
-
-#panel_iframe:
-#  pihole:
-#    title: Pi-Hole
-#    icon: mdi:pi-box
-#    url: http://192.168.1.2:4865/admin/index.php
 
 nest:
   client_id: !secret nest_client_id
@@ -107,6 +101,10 @@ hue:
 webostv:
   host: 192.168.1.13
   name: TV
+
+spotify:
+  client_id: !secret spotify_client_id
+  client_secret: !secret spotify_client_secret
 
 notify:
   - name: My PushBullet
@@ -122,6 +120,22 @@ tplink:
   discovery: true
     
 switch:
+#  - platform: command_line
+#    switches:
+#      pihole:
+#        command_on: 'curl -X PUT "http://192.168.1.5:4865/admin/api.php?enable&auth="'
+#        command_off: 'curl -X PUT "http://192.168.1.5:4865/admin/api.php?disable=3600&auth="'
+#        command_state: 'curl -X GET "http://192.168.1.5:4865/admin/api.php?status"'
+#        value_template: '{{ value_json.status == "enabled" }}'
+#        friendly_name: Pi Hole
+
+  - platform: mqtt
+    name: "AdGuard"
+    command_topic: "home/adguard/filtering"
+    payload_on: 'on'
+    payload_off: 'off'
+    retain: true
+
   - platform: mqtt
     name: "Flux"
     command_topic: "home/flux/set"
@@ -150,6 +164,60 @@ switch:
     command_topic: "home/alarms"
     payload_on: '{ "State": "On" }'
     payload_off: '{ "State": "Off" }'
+
+  - platform: circadian_lighting
+    initial_transition: 10
+    disable_brightness_adjust: false
+    lux_entity: sensor.outside_lightlevel
+    min_brightness: 50
+    max_brightness: 100
+    lights_ct:
+      - light.theater_lamp_1
+      - light.theater_lamp_2
+      - light.entry_1
+      - light.entry_2
+      - light.entry_3
+      - light.kitchen_ceiling_sink
+      - light.kitchen_ceiling_1
+      - light.kitchen_ceiling_2
+      - light.kitchen_ceiling_3
+      - light.kitchen_ceiling_4
+      - light.office_1
+      - light.office_2
+      - light.office_3
+      - light.formal_dining_1
+      - light.formal_dining_2
+      - light.formal_dining_3
+      - light.dining_1     
+      - light.dining_2
+      - light.dining_3
+      - light.bedroom_hall_1
+      - light.bedroom_hall_2
+      - light.bedroom_hall_3
+      - light.master_ceiling_1
+      - light.master_ceiling_2
+      - light.master_bedside_lamp
+      - light.master_accent_headboard
+      - light.master_accent_go
+      - light.bedroom_anna_ceiling_1
+      - light.bedroom_anna_ceiling_2
+      - light.bedroom_anna_lamp
+      - light.bedroom_james_ceiling_1
+      - light.bedroom_james_ceiling_2
+      - light.bedroom_james_lamp
+      - light.bedroom_nathan_ceiling_1
+      - light.bedroom_nathan_ceiling_2
+      - light.bedroom_nathan_lamp
+    lights_ct_nobrightness:
+      - light.mantle_ceiling_1
+      - light.mantle_ceiling_2
+      - light.mantle_ceiling_3
+      - light.tv_accent_bias
+      - light.tv_accent_mantle
+      - light.kitchen_accent_coffee
+      - light.kitchen_accent_dishwasher
+      - light.kitchen_accent_microwave
+      - light.kitchen_accent_oven
 
 #cover:
 #  - platform: mqtt
@@ -254,11 +322,6 @@ rest_command:
       content-type: application/json
     payload: '{"scene": "BD3-jG4I1eM6I8C"}'
 
-media_player:
-  - platform: spotify
-    client_id: !secret spotify_client_id
-    client_secret: !secret spotify_client_secret
-
 #input_number:
 #  kitchen:
 #    name: Presets
@@ -276,7 +339,10 @@ input_text:
   rfid_uid_last:
     name: Music UID
     initial: None
-    
+
+# Covers
+cover: !include cover.yaml
+
 # Lights
 light: !include lights.yaml
 

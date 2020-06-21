@@ -1,0 +1,28 @@
+
+  - platform: group
+    name: Bedroom Blinds
+    entities:
+      - cover.blind_james_1
+      - cover.blind_james_2
+      - cover.blind_nathan
+      
+  - platform: group
+    name: James' Blinds
+    entities:
+      - cover.blind_james_1
+      - cover.blind_james_2
+  
+  - platform: group
+    name: Downstairs Blinds
+    entities:
+      - cover.kitchen_nook_blind_east
+      - cover.kitchen_nook_blind_west
+
+  - platform: group
+    name: All Blinds
+    entities:
+      - cover.blind_james_1
+      - cover.blind_james_2
+      - cover.blind_nathan
+      - cover.kitchen_nook_blind_east
+      - cover.kitchen_nook_blind_west

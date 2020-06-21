@@ -328,14 +328,16 @@
 
 # Garage Door Opener Button
 - id: auto88
-  alias: Garage Button Pressed
-  initial_state: false
+  alias: Fix Soundbar Button
+  initial_state: true
   trigger:
-  - entity_id: sensor.garage_opener
-    platform: state
+    platform: event
+    event_type: hue_event
+    event_data:
+      id: button_garage
   action:
     - service: script.turn_on
-      entity_id: script.garage_opener
+      entity_id: script.execute_fix_soundbar
 
 - id: ios_widgit_garage_door
   alias: "Garage Door Widgit"
@@ -348,6 +350,42 @@
   action:
     service: script.turn_on
     entity_id: script.garage_opener
+
+- id: ios_widgit_lights_tv
+  alias: "Lights TV Widgit"
+  initial_state: true
+  trigger:
+  - platform: event
+    event_type: ios.action_fired
+    event_data:
+      actionName: 'lights_tv'
+  action:
+    service: script.turn_on
+    entity_id: script.hue_tv
+
+- id: ios_widgit_lights_flux
+  alias: "Lights Flux Widgit"
+  initial_state: true
+  trigger:
+  - platform: event
+    event_type: ios.action_fired
+    event_data:
+      actionName: 'lights_flux'
+  action:
+    service: script.turn_on
+    entity_id: script.hue_relax
+
+- id: ios_widgit_lights_dinner
+  alias: "Lights Dinner Widgit"
+  initial_state: true
+  trigger:
+  - platform: event
+    event_type: ios.action_fired
+    event_data:
+      actionName: 'lights_dinner'
+  action:
+    service: script.turn_on
+    entity_id: script.hue_dinner
 
 - id: auto89
   alias: Garage Door Nighly Status
@@ -410,3 +448,133 @@
 #  action:
 #  - service: switch.turn_off
 #    entity_id: switch.christmas_tree
+
+- id: '1588442833532'
+  alias: AdGuard State On from MQTT
+  description: ''
+  trigger:
+  - payload: 'on'
+    platform: mqtt
+    topic: home/adguard/filtering
+  condition:
+  - condition: state
+    entity_id: switch.adguard
+    state: 'off'
+  action:
+  - data: {}
+    entity_id: switch.adguard
+    service: switch.turn_on
+- id: '1588442896059'
+  alias: AdGuard State Off from MQTT
+  description: ''
+  trigger:
+  - payload: 'off'
+    platform: mqtt
+    topic: home/adguard/filtering
+  condition:
+  - condition: state
+    entity_id: switch.adguard
+    state: 'on'
+  action:
+  - data: {}
+    entity_id: switch.adguard
+    service: switch.turn_off
+
+# Automations for Blinds
+- id: '12345678'
+  alias: Blinds for Bedrooms at Dawn
+  description: ''
+  trigger: 
+    - platform: time
+      at: "07:45:00"
+  condition: 
+    condition: state
+    entity_id: sensor.anyone_home
+    state: 'True'
+  action:
+    service: cover.open_cover
+    entity_id: cover.bedroom_blinds
+
+- id: '12345679'
+  alias: Blinds for Bedrooms at Dusk
+  description: ''
+  trigger: 
+    - platform: sun
+      event: sunset
+      offset: "-00:05:00"
+  condition: 
+    condition: state
+    entity_id: sensor.anyone_home
+    state: 'True'
+  action:
+    service: cover.close_cover
+    entity_id: cover.bedroom_blinds
+
+- id: '12345680'
+  alias: Blinds for Bedrooms at Night
+  description: ''
+  trigger: 
+    - platform: time
+      at: "20:00:00"
+  condition: 
+    condition: state
+    entity_id: sensor.anyone_home
+    state: 'True'
+  action:
+    service: cover.close_cover
+    entity_id: cover.bedroom_blinds
+
+- id: '12345681'
+  alias: Blinds for Downstairs at Dawn
+  description: ''
+  trigger: 
+    - platform: sun
+      event: sunrise
+      offset: "-00:05:00"
+  condition:
+    condition: state
+    entity_id: sensor.anyone_home
+    state: 'True'
+  action:
+    service: cover.open_cover
+    entity_id: cover.downstairs_blinds
+    
+- id: '12345682'
+  alias: Blinds for Downstairs at Dusk
+  description: ''
+  trigger: 
+    - platform: sun
+      event: sunset
+      offset: "-00:05:00"
+  condition: 
+    condition: state
+    entity_id: sensor.anyone_home
+    state: 'True'
+  action:
+    service: cover.close_cover
+    entity_id: cover.downstairs_blinds
+
+- id: '12345683'
+  alias: Blinds for Downstairs at Night
+  description: ''
+  trigger: 
+    - platform: time
+      at: "20:00:00"
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: sensor.anyone_home
+        state: 'True'
+      - condition: state
+        entity_id: cover.downstairs_blinds
+        state: open
+  action:
+    - service: cover.set_cover_position
+      data:
+        entity_id: cover.kitchen_nook_blind_east
+        position: 33
+    - service: cover.set_cover_position
+      data:
+        entity_id: cover.kitchen_nook_blind_west
+        position: 66

@@ -269,9 +269,13 @@ pc_audio_to_aux:
   sequence:
   - service: rest_command.pc_source_select_aux
 
+execute_fix_soundbar:
+  alias: "Fix Soundbar"
+  sequence:
+  - service: script.soundbar_audio_to_tv
+
 # Set Bose Soundbar Audio to TV
 soundbar_audio_to_tv:
-  alias: "Fix Soundbar"
   sequence:
   - service: media_player.turn_on
     entity_id: media_player.theater

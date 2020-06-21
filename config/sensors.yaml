@@ -1,8 +1,12 @@
   - platform: time_date
     display_options:
       - 'date_time'
-    
-  #- platform: huesensor
+      - 'time'
+      - 'date'
+
+  - platform: cert_expiry
+    host: leslietrowbridge.com
+    port: 8123
 
   - platform: rest
     resource: !secret hue_sensor_presence_anybody
@@ -99,6 +103,26 @@
 #    value_template: '{{ value_json.state.lastupdated }}'
 #    scan_interval: 2
 #    name: 'Garage Opener'
+
+# Circadian Color Temperature
+#  - platform: mqtt
+#    name: 'Circadian Temperature'
+#    unit_of_measurement: '°K'
+#    state_topic: "home/circadian/colortemperature"
+#    value_template: >
+#      {% if is_state('sun.sun', 'below_horizon') %}
+#        2000
+#      {% else if is_state('sun.sun.rising') %}
+#        
+#      {% else %}
+#        5000
+
+# Circadian
+#  - platform: mqtt
+#    name: 'Circadian Temperature'
+#    unit_of_measurement: '°K'
+#    state_topic: "home/circadian"
+#    value_template: '{{ value_json.ColorTemperature }}'
 
 # Contact Sensors
   - platform: mqtt

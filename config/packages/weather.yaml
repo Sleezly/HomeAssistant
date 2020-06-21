@@ -64,7 +64,7 @@ sensor:
           {% endif %}
 
       forecast_1:
-        friendly_name: 'First'
+        friendly_name: 'Tomorrow'
         value_template: >          
           {{states.sensor.skynet_forecast_1_high.state}}°/{{states.sensor.skynet_forecast_1_low.state}}°/{{states.sensor.skynet_forecast_1_percipitation.state}}%
         icon_template: >-
