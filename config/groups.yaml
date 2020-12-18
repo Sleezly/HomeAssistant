@@ -35,19 +35,19 @@
     icon: mdi:lightbulb-on
     entities:
       - light.downstairs
-      - light.accent_lights
-      - light.theater_lights
-      - light.kitchen_lights
-      - light.dining_lights
-      - light.office_lights
-      - light.entry_lights
+      - light.accents
+      - light.theater
+      - light.kitchen
+      - light.dining
+      - light.office
+      - light.entry
       - light.bedroom_hallway
-      - light.master_lights
+      - light.master_bedroom
       - light.bedroom_anna
       - light.bedroom_james
       - light.bedroom_nathan
       - light.bathroom
-      - light.outside_lights
+      - light.outside
 
   flux_view:
     name: Flux
@@ -72,14 +72,9 @@
       - sensor.me_home
       - switch.guest
       - cover.all_blinds
-      - cover.downstairs_blinds
-      - cover.kitchen_nook_blind_east
-      - cover.kitchen_nook_blind_west
-      - cover.james_blinds
-      - cover.blind_nathan
-      - switch.yi_home_outlet
-      - switch.christmas_tree
-      - switch.annas_nightlight
+      - switch.camera
+      - switch.tree
+      - switch.nightlight
       - switch.door_alarms
       - switch.adguard
 
@@ -123,7 +118,7 @@
 
   settings:
     name: Settings
-    icon: mdi:settings
+    icon: mdi:cog-outline
     entities:
       - script.home_assistant_restart
       - script.pc_audio_to_aux

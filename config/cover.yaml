@@ -2,15 +2,15 @@
   - platform: group
     name: Bedroom Blinds
     entities:
-      - cover.blind_james_1
-      - cover.blind_james_2
-      - cover.blind_nathan
+      - cover.james_blind_1
+      - cover.james_blind_2
+      - cover.nathan_blind
       
   - platform: group
     name: James' Blinds
     entities:
-      - cover.blind_james_1
-      - cover.blind_james_2
+      - cover.james_blind_1
+      - cover.james_blind_2
   
   - platform: group
     name: Downstairs Blinds
@@ -21,8 +21,8 @@
   - platform: group
     name: All Blinds
     entities:
-      - cover.blind_james_1
-      - cover.blind_james_2
-      - cover.blind_nathan
+      - cover.james_blind_1
+      - cover.james_blind_2
+      - cover.nathan_blind
       - cover.kitchen_nook_blind_east
       - cover.kitchen_nook_blind_west
