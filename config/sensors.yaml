@@ -1,69 +1,69 @@
-  - platform: time_date
-    display_options:
-      - 'date_time'
-      - 'time'
-      - 'date'
+- platform: time_date
+  display_options:
+    - "date_time"
+    - "time"
+    - "date"
 
-  - platform: cert_expiry
-    host: leslietrowbridge.com
-    port: 8123
+- platform: cert_expiry
+  host: leslietrowbridge.com
+  port: 8123
 
-  - platform: rest
-    resource: !secret hue_sensor_presence_anybody
-    value_template: '{{ value_json.state.presence }}'
-    scan_interval: 60
-    name: 'Anyone Home'
+- platform: rest
+  resource: !secret hue_sensor_presence_anybody
+  value_template: "{{ value_json.state.presence }}"
+  scan_interval: 60
+  name: "Anyone Home"
 
-  - platform: rest
-    resource: !secret hue_sensor_presence_victoria
-    value_template: '{{ value_json.state.presence }}'
-    scan_interval: 120
-    name: 'Wife Home'
+- platform: rest
+  resource: !secret hue_sensor_presence_victoria
+  value_template: "{{ value_json.state.presence }}"
+  scan_interval: 120
+  name: "Wife Home"
 
-  - platform: rest
-    resource: !secret hue_sensor_presence_leslie
-    value_template: '{{ value_json.state.presence }}'
-    scan_interval: 120
-    name: 'Me Home'
+- platform: rest
+  resource: !secret hue_sensor_presence_leslie
+  value_template: "{{ value_json.state.presence }}"
+  scan_interval: 120
+  name: "Me Home"
 
-  - platform: rest
-    resource: !secret hue_sensor_motion_upstairs
-    value_template: '{{ value_json.state.status }}'
-    scan_interval: 5
-    name: 'Hallway Motion'
+- platform: rest
+  resource: !secret hue_sensor_motion_upstairs
+  value_template: "{{ value_json.state.status }}"
+  scan_interval: 5
+  name: "Hallway Motion"
 
-  - platform: rest
-    resource: !secret hue_sensor_motion_garage
-    value_template: '{{ value_json.state.status }}'
-    scan_interval: 5
-    name: 'Garage Motion'
+- platform: rest
+  resource: !secret hue_sensor_motion_garage
+  value_template: "{{ value_json.state.status }}"
+  scan_interval: 5
+  name: "Garage Motion"
 
-  - platform: rest
-    resource: !secret hue_sensor_motion_patio
-    value_template: '{{ value_json.state.status }}'
-    scan_interval: 120
-    name: 'Patio Motion'
+- platform: rest
+  resource: !secret hue_sensor_motion_patio
+  value_template: "{{ value_json.state.status }}"
+  scan_interval: 120
+  name: "Patio Motion"
 
-  - platform: rest
-    resource: !secret hue_sensor_temperature
-    value_template: '{{ (((value_json.state.temperature | float / 100 * 1.8 + 32) * 100) | int / 100) }}'
-    scan_interval: 120
-    unit_of_measurement: '°F'
-    name: 'Hallway Temp'
+- platform: rest
+  resource: !secret hue_sensor_temperature
+  value_template: "{{ (((value_json.state.temperature | float / 100 * 1.8 + 32) * 100) | int / 100) }}"
+  scan_interval: 120
+  unit_of_measurement: "°F"
+  name: "Hallway Temp"
 
-  - platform: rest
-    resource: !secret hue_sensor_temperature_outside
-    value_template: '{{ (((value_json.state.temperature | float / 100 * 1.8 + 32) * 100) | int / 100) }}'
-    scan_interval: 120
-    unit_of_measurement: '°F'
-    name: 'Outside Temp'
+- platform: rest
+  resource: !secret hue_sensor_temperature_outside
+  value_template: "{{ (((value_json.state.temperature | float / 100 * 1.8 + 32) * 100) | int / 100) }}"
+  scan_interval: 120
+  unit_of_measurement: "°F"
+  name: "Outside Temp"
 
-  - platform: rest
-    resource: !secret hue_sensor_lightlevel_outside
-    value_template: '{{ value_json.state.lightlevel }}'
-    scan_interval: 120
-    unit_of_measurement: 'LUX'
-    name: 'Outside Lightlevel'
+- platform: rest
+  resource: !secret hue_sensor_lightlevel_outside
+  value_template: "{{ value_json.state.lightlevel }}"
+  scan_interval: 120
+  unit_of_measurement: "LUX"
+  name: "Outside Lightlevel"
 
 #  - platform: rest
 #    resource: !secret hue_sensor_lightlevel_outside
@@ -72,224 +72,192 @@
 #    name: 'Daylight'
 
 # Contact Sensors
-  - platform: mqtt
-    name: 'Pantry Door'
-    state_topic: "home/pantry"
-    value_template: '{{ value_json.Door }}'
-    
-  - platform: mqtt
-    name: 'Garage Door'
-    state_topic: "home/garage"
-    value_template: '{{ value_json.Door }}'
+- platform: mqtt
+  name: "Pantry Door"
+  state_topic: "home/pantry"
+  value_template: "{{ value_json.Door }}"
 
-# SkyNet Current Conditions
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Temperature }}'
-    scan_interval: 60
-    unit_of_measurement: '°F'
-    name: 'Temperature'
-    
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Icon }}'
-    scan_interval: 60
-    name: 'SkyNet Current Icon'
+- platform: mqtt
+  name: "Garage Door"
+  state_topic: "home/garage"
+  value_template: "{{ value_json.Door }}"
+                                                                                                                                                                                                                          
+# SkyNet Current Conditions                                                                                                                                                                                                  
+- platform: mqtt                                                                                                                                                                                                           
+  name: 'Temperature'                                                                                                                                                                                                      
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Temperature }}'                                                                                                                                                                           
+  unit_of_measurement: '°F'                                                                                                                                                                                                
 
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Summary }}'
-    scan_interval: 60
-    name: 'SkyNet Daily Summary'
-          
-# SkyNet Forecast for Today
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Daily[0].High }}'
-    scan_interval: 60
-    name: 'SkyNet Forecast Today High'
+- platform: mqtt                                                                                                                                                                                                           
+  name: 'SkyNet Current Icon'                                                                                                                                                                                              
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Icon }}'                                                                                                                                                                                  
 
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Daily[0].Low }}'
-    scan_interval: 60
-    name: 'SkyNet Forecast Today Low'
+- platform: mqtt                                                                                                                                                                                                           
+  name: 'SkyNet Daily Summary'                                                                                                                                                                                             
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Summary }}'                                                                                                                                                                               
 
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Daily[0].Percipitation }}'
-    scan_interval: 60
-    name: 'SkyNet Forecast Today Percipitation'
+# SkyNet Forecast for Today                                                                                                                                                                                                  
+- platform: mqtt                                                                                                                                                                                                           
+  name: 'SkyNet Forecast Today High'                                                                                                                                                                                       
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Daily[0].High }}'                                                                                                                                                                         
 
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Daily[0].Icon }}'
-    scan_interval: 60
-    name: 'SkyNet Forecast Today Icon'
+- platform: mqtt                                                                                                                                                                                                           
+  name: 'SkyNet Forecast Today Low'                                                                                                                                                                                        
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Daily[0].Low }}'                                                                                                                                                                          
 
-# SkyNet Forecast for 1
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Daily[1].High }}'
-    scan_interval: 60
-    name: 'SkyNet Forecast 1 High'
+- platform: mqtt                                                                                                                                                                                                           
+  name: 'SkyNet Forecast Today Percipitation'                                                                                                                                                                              
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Daily[0].Percipitation }}'                                                                                                                                                                
 
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Daily[1].Low }}'
-    scan_interval: 60
-    name: 'SkyNet Forecast 1 Low'
+- platform: mqtt                                                                                                                                                                                                           
+  name: 'SkyNet Forecast Today Icon'                                                                                                                                                                                       
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Daily[0].Icon }}'                                                                                                                                                                         
 
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Daily[1].Percipitation }}'
-    scan_interval: 60
-    name: 'SkyNet Forecast 1 Percipitation'
+# SkyNet Forecast for 1                                                                                                                                                                                                      
+- platform: mqtt                                                                                                                                                                                                           
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Daily[1].High }}'                                                                                                                                                                         
+  name: 'SkyNet Forecast 1 High'                                                                                                                                                                                           
 
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Daily[1].Icon }}'
-    scan_interval: 60
-    name: 'SkyNet Forecast 1 Icon'
+- platform: mqtt                                                                                                                                                                                                           
+  name: 'SkyNet Forecast 1 Low'                                                                                                                                                                                            
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Daily[1].Low }}'                                                                                                                                                                          
 
-# SkyNet Forecast for 2
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Daily[2].High }}'
-    scan_interval: 60
-    name: 'SkyNet Forecast 2 High'
+- platform: mqtt                                                                                                                                                                                                           
+  name: 'SkyNet Forecast 1 Percipitation'                                                                                                                                                                                  
+  state_topic: "home/weather"                            
+  value_template: '{{ value_json.Daily[1].Percipitation }}'                                                                                                                                                                
 
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Daily[2].Low }}'
-    scan_interval: 60
-    name: 'SkyNet Forecast 2 Low'
+- platform: mqtt                                                                                                                                                                                                           
+  name: 'SkyNet Forecast 1 Icon'                                                                                                                                                                                           
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Daily[1].Icon }}'                                                                                                                                                                         
 
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Daily[2].Percipitation }}'
-    scan_interval: 60
-    name: 'SkyNet Forecast 2 Percipitation'
+# SkyNet Forecast for 2                                                                                                                                                                                                      
+- platform: mqtt                                                                                                                                                                                                           
+  name: 'SkyNet Forecast 2 High'                                                                                                                                                                                           
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Daily[2].High }}'                                                                                                                                                                         
 
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Daily[2].Icon }}'
-    scan_interval: 60
-    name: 'SkyNet Forecast 2 Icon'
-    
-# SkyNet Forecast for 3
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Daily[3].High }}'
-    scan_interval: 60
-    name: 'SkyNet Forecast 3 High'
+- platform: mqtt                                                                                                                                                                                                           
+  name: 'SkyNet Forecast 2 Low'                                                                                                                                                                                            
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Daily[2].Low }}'                                                                                                                                                                          
 
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Daily[3].Low }}'
-    scan_interval: 60
-    name: 'SkyNet Forecast 3 Low'
+- platform: mqtt                                                                                                                                                                                                           
+  name: 'SkyNet Forecast 2 Percipitation'                                                                                                                                                                                  
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Daily[2].Percipitation }}'                                                                                                                                                                
 
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Daily[3].Percipitation }}'
-    scan_interval: 60
-    name: 'SkyNet Forecast 3 Percipitation'
+- platform: mqtt                                                                                                                                                                                                           
+  name: 'SkyNet Forecast 2 Icon'                                                                                                                                                                                           
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Daily[2].Icon }}'                                                                                                                                                                         
 
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Daily[3].Icon }}'
-    scan_interval: 60
-    name: 'SkyNet Forecast 3 Icon'
+# SkyNet Forecast for 3                                                                                                                                                                                                      
+- platform: mqtt                                                                                                                                                                                                           
+  name: 'SkyNet Forecast 3 High'                                                                                                                                                                                           
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Daily[3].High }}'                                                                                                                                                                         
 
-# SkyNet Forecast for 4
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Daily[4].High }}'
-    scan_interval: 60
-    name: 'SkyNet Forecast 4 High'
+- platform: mqtt                                                                                                                                                                                                           
+  name: 'SkyNet Forecast 3 Low'                                                                                                                                                                                            
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Daily[3].Low }}'                                                                                                                                                                          
 
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Daily[4].Low }}'
-    scan_interval: 60
-    name: 'SkyNet Forecast 4 Low'
+- platform: mqtt                                                                                                                                                                                                           
+  name: 'SkyNet Forecast 3 Percipitation'                                                                                                                                                                                  
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Daily[3].Percipitation }}'                                                                                                                                                                
 
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Daily[4].Percipitation }}'
-    scan_interval: 60
-    name: 'SkyNet Forecast 4 Percipitation'
+- platform: mqtt                                                                                                                                                                                                           
+  name: 'SkyNet Forecast 3 Icon'                                                                                                                                                                                           
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Daily[3].Icon }}'                                                                                                                                                                         
 
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Daily[4].Icon }}'
-    scan_interval: 60
-    name: 'SkyNet Forecast 4 Icon'
+# SkyNet Forecast for 4                                                                                                                                                                                                      
+- platform: mqtt                                                                                                                                                                                                           
+  name: 'SkyNet Forecast 4 High'                                                                                                                                                                                           
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Daily[4].High }}'                                                                                                                                                                         
 
-# SkyNet Forecast for 5
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Daily[5].High }}'
-    scan_interval: 60
-    name: 'SkyNet Forecast 5 High'
+- platform: mqtt                                                                                                                                                                                                           
+  name: 'SkyNet Forecast 4 Low'                                                                                                                                                                                            
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Daily[4].Low }}'                                                                                                                                                                          
 
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Daily[5].Low }}'
-    scan_interval: 60
-    name: 'SkyNet Forecast 5 Low'
+- platform: mqtt                                                                                                                                                                                                           
+  name: 'SkyNet Forecast 4 Percipitation'                                                                                                                                                                                  
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Daily[4].Percipitation }}'                                                                                                                                                                
 
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Daily[5].Percipitation }}'
-    scan_interval: 60
-    name: 'SkyNet Forecast 5 Percipitation'
+- platform: mqtt                                                                                                                                                                                                                                                                                                                                                                                                                   
+  name: 'SkyNet Forecast 4 Icon'                                                                                                                                                                                           
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Daily[4].Icon }}'                                                                                                                                                                         
 
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Daily[5].Icon }}'
-    scan_interval: 60
-    name: 'SkyNet Forecast 5 Icon'
+# SkyNet Forecast for 5                                                                                                                                                                                                      
+- platform: mqtt                                                                                                                                                                                                           
+  name: 'SkyNet Forecast 5 High'                                                                                                                                                                                           
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Daily[5].High }}'                                                                                                                                                                         
 
-# SkyNet Forecast for 6
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Daily[6].High }}'
-    scan_interval: 60
-    name: 'SkyNet Forecast 6 High'
+- platform: mqtt                                                                                                                                                                                                           
+  name: 'SkyNet Forecast 5 Low'                                                                                                                                                                                            
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Daily[5].Low }}'                                                                                                                                                                          
 
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Daily[6].Low }}'
-    scan_interval: 60
-    name: 'SkyNet Forecast 6 Low'
+- platform: mqtt                                                                                                                                                                                                           
+  name: 'SkyNet Forecast 5 Percipitation'                                                                                                                                                                                  
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Daily[5].Percipitation }}'                                                                                                                                                                
 
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Daily[6].Percipitation }}'
-    scan_interval: 60
-    name: 'SkyNet Forecast 6 Percipitation'
+- platform: mqtt                                                                                                                                                                                                           
+  name: 'SkyNet Forecast 5 Icon'                                                                                                                                                                                           
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Daily[5].Icon }}'                                                                                                                                                                         
 
-  - platform: rest
-    resource: !secret skynet_controller
-    value_template: '{{ value_json.Daily[6].Icon }}'
-    scan_interval: 60
-    name: 'SkyNet Forecast 6 Icon'
+# SkyNet Forecast for 6                                                                                                                                                                                                      
+- platform: mqtt                                                                                                                                                                                                           
+  name: 'SkyNet Forecast 6 High'                                                                                                                                                                                           
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Daily[6].High }}'                                                                                                                                                                         
+
+- platform: mqtt                                                                                                                                                                                                           
+  name: 'SkyNet Forecast 6 Low'                                                                                                                                                                                            
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Daily[6].Low }}'                                                                                                                                                                          
+
+- platform: mqtt                                                                                                                                                                                                           
+  name: 'SkyNet Forecast 6 Percipitation'                                                                                                                                                                                  
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Daily[6].Percipitation }}'                                                                                                                                                                
+
+- platform: mqtt                                                                                                                                                                                                           
+  name: 'SkyNet Forecast 6 Icon'                                                                                                                                                                                           
+  state_topic: "home/weather"                                                                                                                                                                                              
+  value_template: '{{ value_json.Daily[6].Icon }}'                                                                                                                                                                         
 
 # Flux
-  - platform: mqtt
-    name: 'Flux Temperature'
-    unit_of_measurement: '°K'
-    state_topic: "home/flux/status"
-    value_template: '{{ value_json.ColorTemperature }}'
+- platform: mqtt
+  name: "Flux Temperature"
+  unit_of_measurement: "°K"
+  state_topic: "home/flux/status"
+  value_template: "{{ value_json.ColorTemperature }}"
 
-  - platform: mqtt
-    name: 'Flux Brightness'
-    unit_of_measurement: 'BYTE'
-    state_topic: "home/flux/status"
-    value_template: '{{ value_json.Brightness }}'
-
+- platform: mqtt
+  name: "Flux Brightness"
+  unit_of_measurement: "BYTE"
+  state_topic: "home/flux/status"
+  value_template: "{{ value_json.Brightness }}"
 #  - platform: rest
 #    resource: !secret flux_controller
 #    value_template: '{{ value_json.LastColorTemperature }}'
@@ -319,7 +287,7 @@
 #      {% if is_state('sun.sun', 'below_horizon') %}
 #        2000
 #      {% else if is_state('sun.sun.rising') %}
-#        
+#
 #      {% else %}
 #        5000
 
